@@ -28,4 +28,3 @@ public class Rental {
         return this.client; //needs fixes
     }
 }
-
