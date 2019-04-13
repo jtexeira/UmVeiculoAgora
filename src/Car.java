@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Car {
     private String numberPlate;
-    private int type;
+    private CarType type;
     private double avgSpeed;
     private double basePrice;
     private double gasMilage;
@@ -11,8 +11,14 @@ public class Car {
 
     private Point position;
     private double range;
+    
+    public enum CarType {
+        Hybrid,
+        Gas,
+        Electric
+    }
 
-    public Car(String numberPlate, int type, double avgSpeed, double basePrice, double gasMilage, int rating, Point position, double range) {
+    public Car(String numberPlate, CarType type, double avgSpeed, double basePrice, double gasMilage, int rating, Point position, double range) {
         this.numberPlate = numberPlate;
         this.type = type;
         this.avgSpeed = avgSpeed;
@@ -39,6 +45,11 @@ public class Car {
     public String getNumberPlate() {
         return this.numberPlate;
     }
+
+    public CarType getType() {
+        return this.type;
+    }
+
     public Car clone() {
         return new Car(this);
     }
