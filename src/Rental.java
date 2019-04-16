@@ -1,19 +1,22 @@
+import java.time.LocalDateTime;
+
 public class Rental {
-    //ids or objects ?
     private String clientID;
     private String carID;
     private Point start;
     private Point end;
     private double distance;
     private double price;
+    private LocalDateTime date;
 
-    public Rental(String client, String car, Point start, Point end, double distance, double price) {
+    public Rental(String client, String car, Point start, Point end, double distance, double price, LocalDateTime date) {
         this.clientID = client;
         this.carID = car;
         this.start = start;
         this.end = end;
         this.distance = distance;
         this.price = price;
+        this.date = date;
     }
 
     public Rental(Rental rental) {
@@ -23,6 +26,11 @@ public class Rental {
         this.end = rental.getEnd();
         this.distance = rental.getDistance();
         this.price = rental.getPrice();
+        this.date = rental.getDate();
+    }
+
+    public LocalDateTime getDate() {
+        return this.date;
     }
 
     public Point getStart() {

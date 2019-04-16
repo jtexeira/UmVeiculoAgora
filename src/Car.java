@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Car {
     private String numberPlate;
@@ -7,9 +8,9 @@ public class Car {
     private CarType type;
     private double avgSpeed;
     private double basePrice;
-    private double gasMilage;
-    private int rating;
+    private double gasMileage;
 
+    private int rating;
     private ArrayList<Integer> rentalHistoric;
     private Point position;
     private double range;
@@ -21,26 +22,66 @@ public class Car {
 
     }
 
-    public Car(String numberPlate, CarType type, double avgSpeed, double basePrice, double gasMilage, int rating, Point position, double range) {
+    public void setNumberPlate(String numberPlate) {
         this.numberPlate = numberPlate;
+    }
+
+    public String getOwnerID() {
+        return this.ownerID;
+    }
+
+    public double getAvgSpeed() {
+        return this.avgSpeed;
+    }
+
+    public double getBasePrice() {
+        return this.basePrice;
+    }
+
+    public double getGasMileage() {
+        return this.gasMileage;
+    }
+
+    public int getRating() {
+        return this.rating;
+    }
+
+    public ArrayList<Integer> getRentalHistoric() {
+        return new ArrayList<>(this.rentalHistoric);
+    }
+
+   public Point getPosition() {
+        return this.position;
+    }
+
+   public double getRange() {
+        return this.range;
+    }
+
+
+    public Car(String numberPlate, String ownerID, CarType type, double avgSpeed, double basePrice, double gasMileage, int rating, Point position, double range) {
+        this.numberPlate = numberPlate;
+        this.ownerID = ownerID;
         this.type = type;
         this.avgSpeed = avgSpeed;
         this.basePrice = basePrice;
-        this.gasMilage = gasMilage;
+        this.gasMileage = gasMileage;
         this.rating = rating;
         this.position = position;
         this.range = range;
     }
 
     public Car(Car a) {
-        this.numberPlate = a.numberPlate;
-        this.type = a.type;
-        this.avgSpeed = a.avgSpeed;
-        this.basePrice = a.basePrice;
-        this.gasMilage = a.gasMilage;
-        this.rating = a.rating;
-        this.position = a.position;
-        this.range = a.range;
+        this.numberPlate = a.getNumberPlate();
+        this.ownerID = a.getOwnerID();
+        this.type = a.getType();
+        this.avgSpeed = a.getAvgSpeed();
+        this.basePrice = a.getBasePrice();
+        this.gasMileage = a.getGasMileage();
+        this.rating = a.getRating();
+        this.position = a.getPosition();
+        this.range = a.getRange();
+        this.rentalHistoric = a.getRentalHistoric();
     }
 
     public String getNumberPlate() {
