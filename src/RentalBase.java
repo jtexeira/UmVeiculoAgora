@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class RentalBase {
-    ArrayList<Rental> rentalBase;
+    private ArrayList<Rental> rentalBase;
 
     static private int id;
+
     public RentalBase() {
         this.rentalBase = new ArrayList<>();
         this.id = -1;
@@ -62,7 +63,6 @@ public class RentalBase {
                 .map(Rental::clone)
                 .collect(Collectors.toList());
     }
-
 
     /**
      * Calcula a lista de alugueres de um carro num intervalo de tempo

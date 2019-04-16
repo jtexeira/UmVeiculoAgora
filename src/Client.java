@@ -19,7 +19,7 @@ public class Client extends Users{
             this.pos = ((Client) u).getPos().clone();
     }
 
-    public Client clone(Client u) {
-        return new Client(u);
+    public Client clone() {
+        return new Client(this);
     }
 }

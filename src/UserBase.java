@@ -1,10 +1,14 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class UserBase {
-    HashMap<String, Users> userBase;
+    HashMap<String, Client> clientBase;
+    HashMap<String, Owner> ownerBase;
 
     public UserBase() {
-        this.userBase = new HashMap<>();
+        this.clientBase = new HashMap<>();
+        this.ownerBase = new HashMap<>();
     }
 
     /**
@@ -13,24 +17,15 @@ public class UserBase {
      * @param u User a adicionar
      */
     public void addUser(Users u) {
-        this.userBase.put(u.getEmail(), u.clone());
+        if(u instanceof Client)
+            this.clientBase.put(u.getEmail(), ((Client) u).clone());
+        if(u instanceof Owner)
+            this.ownerBase.put(u.getEmail(), ((Owner) u).clone());
     }
 
-
-
-    /**
-     * Remove um user do sistema
-     * @param id Id do user a remover
-     */
-    public void rmUser(String id) {
-        this.userBase.remove(id);
-    }
-
-    /**
-     * Remove um user do sistema
-     * @param id User a remover
-     */
-    public void rmUser(Users id) {
-        this.userBase.remove(id.getEmail());
+    public List<String> getClientIDS() {
+        return new ArrayList<>(this
+                .clientBase
+                .keySet());
     }
 }
