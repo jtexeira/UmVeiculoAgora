@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Car {
     private String numberPlate;
@@ -20,10 +19,6 @@ public class Car {
         Gas,
         Hybrid
 
-    }
-
-    public void setNumberPlate(String numberPlate) {
-        this.numberPlate = numberPlate;
     }
 
     public String getOwnerID() {
@@ -58,6 +53,13 @@ public class Car {
         return this.range;
     }
 
+    public CarType getType() {
+        return this.type;
+    }
+
+    public String getNumberPlate() {
+        return this.numberPlate;
+    }
 
     public Car(String numberPlate, String ownerID, CarType type, double avgSpeed, double basePrice, double gasMileage, int rating, Point position, double range) {
         this.numberPlate = numberPlate;
@@ -82,14 +84,6 @@ public class Car {
         this.position = a.getPosition();
         this.range = a.getRange();
         this.rentalHistoric = a.getRentalHistoric();
-    }
-
-    public String getNumberPlate() {
-        return this.numberPlate;
-    }
-
-    public CarType getType() {
-        return this.type;
     }
 
     public Car clone() {
