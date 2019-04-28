@@ -13,19 +13,19 @@ public class Weather {
         return seasons[LocalDateTime.now().getMonthValue()];
     }
 
-    public double seasonDelay() {
+    public double getSeasonDelay() {
         switch (getSeason()){
             case "Summer":
                 return 1.0;
 
             case "Spring":
-                return 0.85;
+                return 1.15;
 
             case "Fall":
-                return 0.70;
+                return 1.30;
 
             default:
-                return 0.65;
+                return 1.35;
         }
     }
 }
