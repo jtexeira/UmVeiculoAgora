@@ -25,7 +25,7 @@ public abstract class User {
         this.name = u.getName();
         this.address = u.getAddress();
         this.dateOfBirth = u.getDateOfBirth();
-    }
+   }
 
     public String getName() {
         return this.name;
