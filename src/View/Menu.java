@@ -13,6 +13,26 @@ public class Menu implements IMenu{
     private ArrayList<MenuInd> options;
     private boolean run;
 
+    public <T> void menuNavigator(Navigator<T> nav){
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            out.print("\033\143");
+            out.println(this.createHeader());
+            out.println(nav);
+            switch (scanner.next().trim().charAt(0)){
+                case 'n':
+                    nav.next();
+                    break;
+                case 'p':
+                    nav.previous();
+                    break;
+                case 'b':
+                    this.back();
+                    return;
+            }
+        }
+    }
+
     public enum MenuInd {
         Login,
         Cliente,
@@ -49,21 +69,6 @@ public class Menu implements IMenu{
         return this.menu;
     }
 
-    public String getInputClient(){
-        Scanner scanner = new Scanner(System.in);
-        boolean error = false;
-        while(true){
-            out.print("\033\143");
-            out.println(this.createHeader());
-            if (error)
-                out.println(new StringBetter("Cliente Inválido").under().append("\n").toString());
-            else
-                out.println();
-            out.println("Inserir cliente: ");
-            return scanner.nextLine();
-        }
-    }
-
     public int getInputInteiro(){
         Scanner scanner = new Scanner(System.in);
         String str;
@@ -78,26 +83,6 @@ public class Menu implements IMenu{
             out.println("Inserir Inteiro: ");
             str = scanner.nextLine();
             if (str.matches("^[+-]?\\d{1,8}$"))
-                return Integer.parseInt(str);
-            else
-                error = true;
-        }
-    }
-
-    public int getInputMes(){
-        Scanner scanner = new Scanner(System.in);
-        String str;
-        boolean error = false;
-        while(true){
-            out.print("\033\143");
-            out.println(this.createHeader());
-            if (error)
-                out.println(new StringBetter("Mês Inválido").under().toString());
-            else
-                out.println();
-            out.println("Inserir Mês: ");
-            str = scanner.nextLine();
-            if (str.matches("^[1-9]|1[0-2]$"))
                 return Integer.parseInt(str);
             else
                 error = true;
