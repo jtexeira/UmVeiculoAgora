@@ -35,6 +35,7 @@ public class Menu implements IMenu{
     }
 
     public enum MenuInd {
+        Inicial,
         Login,
         Register,
         Cliente,
@@ -52,7 +53,7 @@ public class Menu implements IMenu{
     }
 
     public Menu() {
-        this.menu = MenuInd.Login;
+        this.menu = MenuInd.Inicial;
         this.prev = new Stack<>();
         this.options = new ArrayList<>();
         this.run = true;
@@ -209,6 +210,11 @@ public class Menu implements IMenu{
 
     private void correctMenu() {
         switch (this.menu) {
+            case Inicial:
+                this.options.clear();
+                this.options.add(MenuInd.Login);
+                this.options.add(MenuInd.Register);
+                break;
             case Login:
                 this.options.clear();
                 this.options.add(MenuInd.Cliente);
