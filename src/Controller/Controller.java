@@ -2,11 +2,13 @@ package Controller;
 
 import Exceptions.InvalidUserException;
 import Exceptions.UnknownCompareTypeException;
+import Exceptions.UserExistsException;
 import Exceptions.WrongPasswordExecption;
 import Model.*;
 import Utils.Point;
 import Utils.StringBetter;
 import View.Menu;
+import View.ViewModel.Register;
 
 import java.util.AbstractMap;
 import java.util.Scanner;
@@ -41,6 +43,47 @@ public class Controller {
                     catch (WrongPasswordExecption e){
                         error = new StringBetter("Invalid Password").under().grey().toString();
                     }
+                    break;
+                case Registar_Cliente:
+                    Register registerCli = menu.newRegister();
+                    Client client = new Client(
+                            registerCli.getPos(),
+                            registerCli.getEmail(),
+                            registerCli.getPasswd(),
+                            registerCli.getName(),
+                            registerCli.getAddress(),
+                            registerCli.getNif()
+                    );
+                    menu.back();
+                    /*
+                    try {
+                        this.model.addUser(client);
+                        menu.back();
+                    }
+                    catch (UserExistsException e){
+
+                    }
+                    */
+                    break;
+                case Registar_Proprietario:
+                    Register registerProp = menu.newRegister();
+                    Owner owner = new Owner(
+                            registerProp.getEmail(),
+                            registerProp.getName(),
+                            registerProp.getAddress(),
+                            registerProp.getNif(),
+                            registerProp.getPasswd()
+                    );
+                    menu.back();
+                    /*
+                    try {
+                        this.model.addUser(owner);
+                        menu.back();
+                    }
+                    catch (UserExistsException e){
+
+                    }
+                    */
                     break;
                 case Closest_Car:
                     try{

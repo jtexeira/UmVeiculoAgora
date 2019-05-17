@@ -1,6 +1,8 @@
 package View;
 import Model.Rental;
+import Utils.Point;
 import Utils.StringBetter;
+import View.ViewModel.Register;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -97,6 +99,29 @@ public class Menu implements IMenu{
         return new AbstractMap.SimpleEntry<>(user, password);
     }
 
+    public Register newRegister(){
+        Scanner scanner = new Scanner(System.in);
+        out.print("\033\143");
+        out.println(this.createHeader());
+        out.println();
+        out.println("Nome de Utilizador:");
+        String user = scanner.nextLine();
+        out.println("Email:");
+        String email = scanner.nextLine();
+        out.println("Password:");
+        String pass = scanner.nextLine();
+        out.println("Morada:");
+        String adress = scanner.nextLine();
+        out.println("Nif:");
+        int nif = scanner.nextInt();
+        out.println("x:");
+        double x = scanner.nextDouble();
+        out.println("y:");
+        double y = scanner.nextDouble();
+
+        return new Register(user, email, pass, adress, nif, new Point(x, y));
+    }
+
     public int getInputInteiro(){
         Scanner scanner = new Scanner(System.in);
         String str;
@@ -162,7 +187,7 @@ public class Menu implements IMenu{
         else {
             this.run = false;
         }
-        if (this.menu.equals(MenuInd.Login))
+        if (this.menu.equals(MenuInd.Login) || this.menu.equals(MenuInd.Register))
             this.back();
         return this;
     }
