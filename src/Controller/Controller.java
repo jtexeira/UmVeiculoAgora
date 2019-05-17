@@ -32,7 +32,7 @@ public class Controller {
                     try {
                         AbstractMap.SimpleEntry<String, String> r = menu.newLogin(error);
                         user = model.logIn(Integer.parseInt(r.getKey()), r.getValue());
-                        menu.selectOption((user instanceof Client)? Menu.MenuInd.Cliente : Menu.MenuInd.Proprietário);
+                        menu.selectOption((user instanceof Client)? Menu.MenuInd.Cliente : Menu.MenuInd.Proprietario);
                         error = "";
                     }
                     catch (InvalidUserException e){

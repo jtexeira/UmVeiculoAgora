@@ -40,7 +40,7 @@ public class Menu implements IMenu{
         Login,
         Register,
         Cliente,
-        Proprietário,
+        Proprietario,
         Closest_Car,
         Cheapest_Car,
         Cheapest_Near_Car,
@@ -247,7 +247,7 @@ public class Menu implements IMenu{
                 this.options.add(MenuInd.Specific_Car);
                 this.options.add(MenuInd.Autonomy_Car);
                 break;
-            case Proprietário:
+            case Proprietario:
                 this.options.clear();
                 this.options.add(MenuInd.Free_Car);
                 this.options.add(MenuInd.Fill_Car);
