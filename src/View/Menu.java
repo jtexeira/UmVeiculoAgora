@@ -39,6 +39,8 @@ public class Menu implements IMenu{
         Inicial,
         Login,
         Register,
+        Registar_Cliente,
+        Registar_Proprietario,
         Cliente,
         Proprietario,
         Closest_Car,
@@ -192,6 +194,12 @@ public class Menu implements IMenu{
             case Register:
                 r += "Registar novo utilizador";
                 break;
+            case Registar_Cliente:
+                r += "Registar novo Cliente";
+                break;
+            case Registar_Proprietario:
+                r += "Registar novo Proprietário";
+                break;
             case Login:
                 r += "Login";
                 break;
@@ -238,6 +246,11 @@ public class Menu implements IMenu{
                 break;
             case Login:
                 this.options.clear();
+                break;
+            case Register:
+                this.options.clear();
+                this.options.add(MenuInd.Registar_Cliente);
+                this.options.add(MenuInd.Registar_Proprietario);
                 break;
             case Cliente:
                 this.options.clear();
