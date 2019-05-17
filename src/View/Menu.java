@@ -87,7 +87,6 @@ public class Menu implements IMenu{
         out.print("\033\143");
         out.println((this.createHeader()));
         out.println(error);
-        out.println();
         out.println("User:");
         String user = scanner.nextLine();
         out.println("Password:");

@@ -35,8 +35,11 @@ public class Controller {
                         menu.selectOption((user instanceof Client)? Menu.MenuInd.Cliente : Menu.MenuInd.Proprietário);
                         error = "";
                     }
-                    catch (InvalidUserException | WrongPasswordExecption  e){
-                        error = new StringBetter("Invalid Credentials").under().grey().toString();
+                    catch (InvalidUserException e){
+                        error = new StringBetter("Invalid Username").under().grey().toString();
+                    }
+                    catch (WrongPasswordExecption e){
+                        error = new StringBetter("Invalid Password").under().grey().toString();
                     }
                     break;
                 case Closest_Car:
