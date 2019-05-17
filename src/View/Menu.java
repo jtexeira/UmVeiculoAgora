@@ -82,10 +82,12 @@ public class Menu implements IMenu{
         scanner.nextLine();
     }
 
-    public AbstractMap.SimpleEntry<String, String> newLogin(){
+    public AbstractMap.SimpleEntry<String, String> newLogin(String error){
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println((this.createHeader()));
+        out.println(error);
+        out.println();
         out.println("User:");
         String user = scanner.nextLine();
         out.println("Password:");
@@ -180,7 +182,6 @@ public class Menu implements IMenu{
 
         for(int i = 0; i < this.options.size(); i++)
             s.append(i + 1).append("- ").append(this.menuOptionText(i)).append("\n");
-        s.append("\n");
         return s.toString();
     }
 

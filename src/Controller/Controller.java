@@ -5,6 +5,7 @@ import Exceptions.UnknownCompareTypeException;
 import Exceptions.WrongPasswordExecption;
 import Model.*;
 import Utils.Point;
+import Utils.StringBetter;
 import View.Menu;
 
 import java.util.AbstractMap;
@@ -24,15 +25,19 @@ public class Controller {
 
     public void run(){
         Scanner scanner = new Scanner(System.in);
+        String error = "";
         while(this.menu.getRun()) {
             switch (menu.getMenu()) {
                 case Login:
                     try {
-                        AbstractMap.SimpleEntry<String, String> r = menu.newLogin();
+                        AbstractMap.SimpleEntry<String, String> r = menu.newLogin(error);
                         user = model.logIn(Integer.parseInt(r.getKey()), r.getValue());
                         menu.selectOption((user instanceof Client)? Menu.MenuInd.Cliente : Menu.MenuInd.Proprietário);
+                        error = "";
                     }
-                    catch (InvalidUserException | WrongPasswordExecption  e){ }
+                    catch (InvalidUserException | WrongPasswordExecption  e){
+                        error = new StringBetter("Invalid Credentials").under().grey().toString();
+                    }
                     break;
                 case Closest_Car:
                     try{
