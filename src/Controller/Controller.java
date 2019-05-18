@@ -102,18 +102,22 @@ public class Controller {
                         out.println(lR.get(i));
                     }
                     String v = scanner.nextLine();
-                    switch (v.charAt(0)){
-                        case 'A':
-                            this.model.rent(lR.get(Integer.parseInt(v.substring(1)) - 1));
-                            break;
-                        case 'R':
-                            owner.refuse(lR.get(Integer.parseInt(v.substring(1)) - 1));
-                            break;
-                        case 'b':
-                            this.menu.back();
-                            break;
+                    try {
+                        switch (v.charAt(0)) {
+                            case 'A':
+                                this.model.rent(lR.get(Integer.parseInt(v.substring(1)) - 1));
+                                break;
+                            case 'R':
+                                owner.refuse(lR.get(Integer.parseInt(v.substring(1)) - 1));
+                                break;
+                            case 'b':
+                                this.menu.back();
+                                break;
+                        }
                     }
+                    catch(NumberFormatException e){}
                     break;
+
                     default:
                         out.println(menu);
                         menu.parser(scanner.nextLine());
