@@ -45,45 +45,35 @@ public class Controller {
                     }
                     break;
                 case Registar_Cliente:
-                    Register registerCli = menu.newRegister();
-                    Client client = new Client(
-                            registerCli.getPos(),
-                            registerCli.getEmail(),
-                            registerCli.getPasswd(),
-                            registerCli.getName(),
-                            registerCli.getAddress(),
-                            registerCli.getNif()
-                    );
-                    menu.back();
-                    /*
                     try {
+                        Register registerCli = menu.newRegister();
+                        Client client = new Client(
+                                registerCli.getPos(),
+                                registerCli.getEmail(),
+                                registerCli.getPasswd(),
+                                registerCli.getName(),
+                                registerCli.getAddress(),
+                                registerCli.getNif()
+                        );
                         this.model.addUser(client);
                         menu.back();
                     }
-                    catch (UserExistsException e){
-
-                    }
-                    */
+                    catch (UserExistsException e){}
                     break;
                 case Registar_Proprietario:
-                    Register registerProp = menu.newRegister();
-                    Owner owner = new Owner(
-                            registerProp.getEmail(),
-                            registerProp.getName(),
-                            registerProp.getAddress(),
-                            registerProp.getNif(),
-                            registerProp.getPasswd()
-                    );
-                    menu.back();
-                    /*
                     try {
+                        Register registerProp = menu.newRegister();
+                        Owner owner = new Owner(
+                                registerProp.getEmail(),
+                                registerProp.getName(),
+                                registerProp.getAddress(),
+                                registerProp.getNif(),
+                                registerProp.getPasswd()
+                        );
                         this.model.addUser(owner);
                         menu.back();
                     }
-                    catch (UserExistsException e){
-
-                    }
-                    */
+                    catch (UserExistsException e){}
                     break;
                 case Closest_Car:
                     try{
@@ -102,7 +92,8 @@ public class Controller {
                     }
                     catch (UnknownCompareTypeException e){}
                     break;
-
+                case Review_Rent:
+                    break;
                     default:
                         out.println(menu);
                         menu.parser(scanner.nextLine());
