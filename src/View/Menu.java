@@ -1,29 +1,28 @@
 package View;
+
+import Exceptions.InvalidNewRegister;
 import Model.Rental;
 import Utils.Point;
 import Utils.StringBetter;
 import View.ViewModel.Register;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 import static java.lang.System.out;
 
-public class Menu implements IMenu{
+public class Menu implements IMenu {
     private MenuInd menu;
     private Stack<MenuInd> prev;
     private ArrayList<MenuInd> options;
     private boolean run;
 
-    public <T> void menuNavigator(Navigator<T> nav){
+    public <T> void menuNavigator(Navigator<T> nav) {
         Scanner scanner = new Scanner(System.in);
-        while(true){
+        while (true) {
             out.print("\033\143");
             out.println(this.createHeader());
             out.println(nav);
-            switch (scanner.next().trim().charAt(0)){
+            switch (scanner.next().trim().charAt(0)) {
                 case 'n':
                     nav.next();
                     break;
@@ -79,7 +78,7 @@ public class Menu implements IMenu{
         return this.menu;
     }
 
-    public void showRental(Rental rental){
+    public void showRental(Rental rental) {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
@@ -88,7 +87,7 @@ public class Menu implements IMenu{
         scanner.nextLine();
     }
 
-    public AbstractMap.SimpleEntry<String, String> newLogin(String error){
+    public AbstractMap.SimpleEntry<String, String> newLogin(String error) {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println((this.createHeader()));
@@ -101,10 +100,11 @@ public class Menu implements IMenu{
         return new AbstractMap.SimpleEntry<>(user, password);
     }
 
-    public Register newRegister(){
+    public Register newRegister(String error) throws InvalidNewRegister {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
+        out.println(new StringBetter(error).under().toString());
         out.println();
         out.println("Nome de Utilizador:");
         String user = scanner.nextLine();
@@ -115,20 +115,27 @@ public class Menu implements IMenu{
         out.println("Morada:");
         String adress = scanner.nextLine();
         out.println("Nif:");
-        int nif = scanner.nextInt();
-        out.println("x:");
-        double x = scanner.nextDouble();
-        out.println("y:");
-        double y = scanner.nextDouble();
+        try {
+            int nif = scanner.nextInt();
+            out.println("UMCarroJa wants to know your location!");
+            out.println("x:");
+            double x = scanner.nextDouble();
+            out.println("y:");
+            double y = scanner.nextDouble();
+            return new Register(user, email, pass, adress, nif, new Point(x, y));
+        }
+        catch (InputMismatchException e) {
+            throw new InvalidNewRegister();
+        }
 
-        return new Register(user, email, pass, adress, nif, new Point(x, y));
+
     }
 
-    public int getInputInteiro(){
+    public int getInputInteiro() {
         Scanner scanner = new Scanner(System.in);
         String str;
         boolean error = false;
-        while(true){
+        while (true) {
             out.print("\033\143");
             out.println(this.createHeader());
             if (error)
@@ -144,11 +151,11 @@ public class Menu implements IMenu{
         }
     }
 
-    public Menu parser(String str){
+    public Menu parser(String str) {
         if (str.matches("^[+-]?\\d{1,8}$")) {
             this.selectOption(Integer.parseInt(str));
         }
-        switch (str){
+        switch (str) {
             case "b":
             case "..":
                 this.back();
@@ -165,7 +172,7 @@ public class Menu implements IMenu{
         return this.run;
     }
 
-    public Menu selectOption(int i){
+    public Menu selectOption(int i) {
         if (this.options.size() > i - 1) {
             this.prev.push(this.menu);
             this.menu = this.options.get(i - 1);
@@ -174,19 +181,18 @@ public class Menu implements IMenu{
         return this;
     }
 
-    public Menu selectOption(MenuInd i){
+    public Menu selectOption(MenuInd i) {
         this.prev.push(this.menu);
         this.menu = i;
         this.correctMenu();
         return this;
     }
 
-    public Menu back(){
+    public Menu back() {
         if (this.prev.size() > 0) {
             this.menu = this.prev.pop();
             this.correctMenu();
-        }
-        else {
+        } else {
             this.run = false;
         }
         if (this.menu.equals(MenuInd.Login) || this.menu.equals(MenuInd.Register))
@@ -194,7 +200,7 @@ public class Menu implements IMenu{
         return this;
     }
 
-    private String createHeader(){
+    private String createHeader() {
         StringBetter strHeader = new StringBetter("\t--");
         for (MenuInd val : this.prev)
             strHeader.append(val.name()).append("/");
@@ -208,14 +214,14 @@ public class Menu implements IMenu{
         s.append("\033\143");
         s.append(this.createHeader()).append("\n\n");
 
-        for(int i = 0; i < this.options.size(); i++)
+        for (int i = 0; i < this.options.size(); i++)
             s.append(i + 1).append("- ").append(this.menuOptionText(i)).append("\n");
         return s.toString();
     }
 
     private String menuOptionText(int i) {
         String r = "";
-        switch (this.options.get(i)){
+        switch (this.options.get(i)) {
             case Inicial:
                 r += "Menu Inicial";
             case Register:
