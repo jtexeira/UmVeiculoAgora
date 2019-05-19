@@ -45,11 +45,13 @@ public class Menu implements IMenu{
         Registar_Proprietario,
         Cliente,
         Proprietario,
+        Client_Stats,
         Closest_Car,
         Cheapest_Car,
         Cheapest_Near_Car,
         Specific_Car,
         Autonomy_Car,
+        Owner_Stats,
         Free_Car,
         Fill_Car,
         Change_Price,
@@ -228,6 +230,10 @@ public class Menu implements IMenu{
             case Login:
                 r += "Login";
                 break;
+            case Client_Stats:
+            case Owner_Stats:
+                r += "Histórico de alugueres";
+                break;
             case Closest_Car:
                 r += "Carro mais próximo das suas coordenadas";
                 break;
@@ -279,6 +285,7 @@ public class Menu implements IMenu{
                 break;
             case Cliente:
                 this.options.clear();
+                this.options.add(MenuInd.Client_Stats);
                 this.options.add(MenuInd.Closest_Car);
                 this.options.add(MenuInd.Cheapest_Car);
                 this.options.add(MenuInd.Cheapest_Near_Car);
@@ -287,6 +294,7 @@ public class Menu implements IMenu{
                 break;
             case Proprietario:
                 this.options.clear();
+                this.options.add(MenuInd.Owner_Stats);
                 this.options.add(MenuInd.Free_Car);
                 this.options.add(MenuInd.Fill_Car);
                 this.options.add(MenuInd.Change_Price);
