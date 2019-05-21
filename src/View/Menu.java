@@ -53,10 +53,8 @@ public class Menu implements IMenu {
         Specific_Car,
         Autonomy_Car,
         Owner_Stats,
-        Free_Car,
-        Fill_Car,
-        Change_Price,
         Review_Rent,
+        Car_Overview,
         Register_Cost,
         Add_Car,
         Top_10_Clients
@@ -91,7 +89,30 @@ public class Menu implements IMenu {
         scanner.nextLine();
     }
 
-    public void top10ClientsShow (ArrayList<ArrayList<String>> valTab){
+    public String carOverviewShow (List<List<String>> valTab){
+        Scanner scanner = new Scanner(System.in);
+        out.print("\033\143");
+        out.println(this.createHeader());
+        out.println();
+        ArrayList<String> colLabl = new ArrayList<>();
+        colLabl.add("Matricula");
+        colLabl.add("Autonomia");
+        colLabl.add("Preço/km");
+        colLabl.add("Disponibilidade");
+        colLabl.add("Ratings");
+        ArrayList<String> linLabl = new ArrayList<>();
+        for(int i = 0; i < valTab.size(); i++ )
+            linLabl.add(String.format("%dº", i + 1));
+
+
+        Table<String> tab = new Table<>(valTab,linLabl,colLabl);
+        out.println(tab);
+
+        return scanner.nextLine().toLowerCase();
+
+    }
+
+    public void top10ClientsShow (List<List<String>> valTab){
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
@@ -341,14 +362,8 @@ public class Menu implements IMenu {
             case Add_Car:
                 r += "Adicionar novo carro";
                 break;
-            case Free_Car:
-                r += "Sinalizar que um dos seus carros está disponível para aluguer";
-                break;
-            case Fill_Car:
-                r += "Abastecer o veiculo";
-                break;
-            case Change_Price:
-                r += "Alterar o preço por km";
+            case Car_Overview:
+                r += "Várias operações sobre carros";
                 break;
             case Review_Rent:
                 r += "Aceitar/rejeitar o aluguer de um determinado cliente;";
@@ -391,9 +406,7 @@ public class Menu implements IMenu {
             case Proprietario:
                 this.options.clear();
                 this.options.add(MenuInd.Owner_Stats);
-                this.options.add(MenuInd.Free_Car);
-                this.options.add(MenuInd.Fill_Car);
-                this.options.add(MenuInd.Change_Price);
+                this.options.add(MenuInd.Car_Overview);
                 this.options.add(MenuInd.Review_Rent);
                 this.options.add(MenuInd.Register_Cost);
                 this.options.add(MenuInd.Add_Car);
@@ -413,13 +426,7 @@ public class Menu implements IMenu {
             case Autonomy_Car:
                 this.options.clear();
                 break;
-            case Free_Car:
-                this.options.clear();
-                break;
-            case Fill_Car:
-                this.options.clear();
-                break;
-            case Change_Price:
+            case Car_Overview:
                 this.options.clear();
                 break;
             case Review_Rent:

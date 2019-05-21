@@ -4,12 +4,9 @@ import Exceptions.*;
 import Model.*;
 import Utils.Point;
 import View.Menu;
-import View.Navigator;
-import View.Table;
 import View.ViewModel.RegisterCar;
 import View.ViewModel.RegisterUser;
 
-import java.sql.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -141,22 +138,29 @@ public class Controller {
                     break;
 
                 case Top_10_Clients:
-                    ArrayList<ArrayList<String>> valTab =
-                            this.model.getBestClients()
+                    menu.top10ClientsShow(this.model.getBestClients()
                             .stream()
-                            .map(
-                                    x -> new ArrayList<>(
-                                            Arrays.asList(
-                                                    x.getKey(),
-                                                    String.format("%.2f", x.getValue())
-                                            )
-                                    )
-                            ).collect(Collectors.toCollection(ArrayList::new));
-
-                    menu.top10ClientsShow(valTab);
-
-
+                            .map(x ->
+                                    Arrays.asList(
+                                            x.getKey(),
+                                            String.format("%.2f", x.getValue()))
+                            ).collect(Collectors.toList()));
                     this.menu.back();
+
+                case Car_Overview:
+                    Owner ownerCar = (Owner)this.user;
+                    String action = this.menu.carOverviewShow(
+                            ownerCar.getCars().stream()
+                            .map(x -> Arrays.asList(x.toString().split("\n")))
+                            .collect(Collectors.toList()));
+                    /*
+                    switch (action.charAt(0)){
+                        case 'f':
+                            break;
+                        case '':
+                            break;
+                    }
+*/
 
                     default:
                         out.println(menu);
