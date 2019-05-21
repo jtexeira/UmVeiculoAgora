@@ -4,7 +4,7 @@ import Exceptions.InvalidNewRegister;
 import Model.Rental;
 import Utils.Point;
 import Utils.StringBetter;
-import View.ViewModel.Register;
+import View.ViewModel.RegisterUser;
 
 import java.util.*;
 
@@ -101,7 +101,7 @@ public class Menu implements IMenu {
         return new AbstractMap.SimpleEntry<>(user, password);
     }
 
-    public Register newRegister(String error) throws InvalidNewRegister {
+    public RegisterUser newRegister(String error) throws InvalidNewRegister {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
@@ -129,13 +129,13 @@ public class Menu implements IMenu {
                 double x = scanner.nextDouble();
                 out.println("y:");
                 double y = scanner.nextDouble();
-                return new Register(user, email, pass, adress, nif, new Point(x, y));
+                return new RegisterUser(user, email, pass, adress, nif, new Point(x, y));
             } catch (InputMismatchException e) {
                 throw new InvalidNewRegister();
             }
         }
         else {
-            return new Register(user, email, pass, adress, nif);
+            return new RegisterUser(user, email, pass, adress, nif);
         }
 
 

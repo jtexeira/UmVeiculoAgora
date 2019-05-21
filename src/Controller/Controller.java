@@ -4,7 +4,7 @@ import Exceptions.*;
 import Model.*;
 import Utils.Point;
 import View.Menu;
-import View.ViewModel.Register;
+import View.ViewModel.RegisterUser;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -39,14 +39,14 @@ public class Controller {
                     break;
                 case Registar_Cliente:
                     try {
-                        Register registerCli = menu.newRegister(error);
+                        RegisterUser registerUserCli = menu.newRegister(error);
                         Client client = new Client(
-                                registerCli.getPos(),
-                                registerCli.getEmail(),
-                                registerCli.getPasswd(),
-                                registerCli.getName(),
-                                registerCli.getAddress(),
-                                registerCli.getNif()
+                                registerUserCli.getPos(),
+                                registerUserCli.getEmail(),
+                                registerUserCli.getPasswd(),
+                                registerUserCli.getName(),
+                                registerUserCli.getAddress(),
+                                registerUserCli.getNif()
                         );
                         this.model.addUser(client);
                         menu.back();
@@ -57,13 +57,13 @@ public class Controller {
                     break;
                 case Registar_Proprietario:
                     try {
-                        Register registerProp = menu.newRegister(error);
+                        RegisterUser registerUserProp = menu.newRegister(error);
                         Owner owner = new Owner(
-                                registerProp.getEmail(),
-                                registerProp.getName(),
-                                registerProp.getAddress(),
-                                registerProp.getNif(),
-                                registerProp.getPasswd()
+                                registerUserProp.getEmail(),
+                                registerUserProp.getName(),
+                                registerUserProp.getAddress(),
+                                registerUserProp.getNif(),
+                                registerUserProp.getPasswd()
                         );
                         this.model.addUser(owner);
                         menu.back();
