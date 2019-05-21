@@ -124,16 +124,8 @@ public class Menu implements IMenu {
         colLabl.add("User");
         colLabl.add("Distance");
         ArrayList<String> linLabl = new ArrayList<>();
-        linLabl.add("1º");
-        linLabl.add("2º");
-        linLabl.add("3º");
-        linLabl.add("4º");
-        linLabl.add("5º");
-        linLabl.add("6º");
-        linLabl.add("7º");
-        linLabl.add("8º");
-        linLabl.add("9º");
-        linLabl.add("10º");
+        for(int i = 1; i < 11; i++)
+            linLabl.add(String.format("%dº", i));
         Table<String> tab = new Table<>(valTab,linLabl,colLabl);
         out.println(tab);
 
