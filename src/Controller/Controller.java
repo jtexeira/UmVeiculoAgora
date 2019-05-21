@@ -7,6 +7,7 @@ import View.Menu;
 import View.ViewModel.RegisterCar;
 import View.ViewModel.RegisterUser;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -149,18 +150,37 @@ public class Controller {
 
                 case Car_Overview:
                     Owner ownerCar = (Owner)this.user;
-                    String action = this.menu.carOverviewShow(
+                    String action = this.menu.carOverviewShow(error,
                             ownerCar.getCars().stream()
                             .map(x -> Arrays.asList(x.toString().split("\n")))
                             .collect(Collectors.toList()));
-                    /*
-                    switch (action.charAt(0)){
-                        case 'f':
-                            break;
-                        case '':
-                            break;
+                    try {
+                        switch (action.charAt(0)) {
+                            case 'r':
+                                ownerCar.getCars().get(Integer.parseInt(action.substring(1)) - 1).refil();
+                                break;
+                            case'C':
+                                String [] s = action.substring(1).split(" ");
+                                if (s.length != 2){
+                                    error = "invalid parameters";
+                                    break;
+                                }
+                                ownerCar
+                                        .getCars()
+                                        .get(Integer.parseInt(s[0]) - 1)
+                                        .setBasePrice(Double.parseDouble(s[1]));
+                                break;
+                            case 'd':
+                                ownerCar.getCars().get(Integer.parseInt(action.substring(1)) - 1).swapState();
+                                break;
+                            case 'b':
+                                this.menu.back();
+                                break;
+                        }
+                        error = "";
                     }
-*/
+                    catch (IndexOutOfBoundsException e){ error = "Valor de carro inválido"; }
+                    catch(NumberFormatException e){ error = "Posição inválida"; }
 
                     default:
                         out.println(menu);

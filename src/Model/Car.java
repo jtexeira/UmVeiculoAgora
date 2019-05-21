@@ -190,7 +190,7 @@ public class Car implements Serializable {
         return new StringBuilder()
                 .append(this.getNumberPlate()).append("\n")
                 .append(this.getRange()).append("\n")
-                .append(String.format("%f.2", this.getBasePrice())).append("\n")
+                .append(String.format("%.2f", this.getBasePrice())).append("\n")
                 .append(this.isAvailable).append("\n")
                 .append(this.getRating()).toString();
     }

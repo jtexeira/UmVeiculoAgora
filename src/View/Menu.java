@@ -89,10 +89,11 @@ public class Menu implements IMenu {
         scanner.nextLine();
     }
 
-    public String carOverviewShow (List<List<String>> valTab){
+    public String carOverviewShow (String error, List<List<String>> valTab){
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
+        out.println(new StringBetter(error).under().toString());
         out.println();
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("Matricula");
@@ -107,6 +108,8 @@ public class Menu implements IMenu {
 
         Table<String> tab = new Table<>(valTab,linLabl,colLabl);
         out.println(tab);
+        out.println();
+        out.println("\tR[pos] -> Refill car / C[pos] [price] -> Change Price / D[pos] -> Toggle Availability");
 
         return scanner.nextLine().toLowerCase();
 
