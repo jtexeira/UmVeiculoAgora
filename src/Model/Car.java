@@ -184,4 +184,14 @@ public class Car implements Serializable {
     public Car clone() {
         return new Car(this);
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append(this.getNumberPlate()).append("\n")
+                .append(this.getRange()).append("\n")
+                .append(String.format("%f.2", this.getBasePrice())).append("\n")
+                .append(this.isAvailable).append("\n")
+                .append(this.getRating()).toString();
+    }
 }
