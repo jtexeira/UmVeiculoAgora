@@ -115,7 +115,7 @@ public class Controller {
                     }
                     catch(NumberFormatException ignored){}
                     break;
-/*
+
                 case Add_Car:
                     try {
                         RegisterCar registerCar = menu.newRegisterCar(error);
@@ -139,7 +139,6 @@ public class Controller {
                     catch (InvalidNewRegister e){ error = "Parametros Inválidos"; }
                     catch (CarExistsException e){ error = "Carro já existe"; }
                     break;
-                    */
 
                 case Top_10_Clients:
                     ArrayList<ArrayList<String>> valTab =
@@ -153,7 +152,7 @@ public class Controller {
                                             )
                                     )
                             ).collect(Collectors.toCollection(ArrayList::new));
-                    
+
                     menu.top10ClientsShow(valTab);
 
 
