@@ -156,15 +156,15 @@ public class Controller {
                             .collect(Collectors.toList()));
                     try {
                         switch (action.charAt(0)) {
+                            case ' ':
+                                break;
                             case 'r':
                                 ownerCar.getCars().get(Integer.parseInt(action.substring(1)) - 1).refil();
                                 break;
                             case'C':
                                 String [] s = action.substring(1).split(" ");
-                                if (s.length != 2){
-                                    error = "invalid parameters";
-                                    break;
-                                }
+                                if (s.length != 2)
+                                    throw new InvalidNumberOfArgumentsException();
                                 ownerCar
                                         .getCars()
                                         .get(Integer.parseInt(s[0]) - 1)
@@ -180,7 +180,8 @@ public class Controller {
                         error = "";
                     }
                     catch (IndexOutOfBoundsException e){ error = "Valor de carro inválido"; }
-                    catch(NumberFormatException e){ error = "Posição inválida"; }
+                    catch (NumberFormatException e){ error = "Posição inválida"; }
+                    catch (InvalidNumberOfArgumentsException e) {error = "Invalid number of parameters";}
 
                     default:
                         out.println(menu);
