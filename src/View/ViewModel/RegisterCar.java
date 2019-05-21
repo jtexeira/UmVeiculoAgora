@@ -19,9 +19,9 @@ public class RegisterCar {
     public RegisterCar(String numberPlate, String type, double avgSpeed, double basePrice, double gasMileage, int range, Point pos, String brand) throws InvalidNewRegister {
         this.numberPlate = numberPlate;
         try {
-            this.type = Car.CarType.fromString(type.toLowerCase());
+            this.type = Car.CarType.valueOf(type.toLowerCase());
         }
-        catch (UnknownCarTypeException e){
+        catch (IllegalArgumentException e){
             throw new InvalidNewRegister();
         }
         this.avgSpeed = avgSpeed;

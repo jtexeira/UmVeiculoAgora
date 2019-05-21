@@ -131,7 +131,6 @@ public class Menu implements IMenu {
             x = scanner.nextDouble();
             out.println("y:");
             y = scanner.nextDouble();
-
         } catch (InputMismatchException e) {
             throw new InvalidNewRegister();
         }
