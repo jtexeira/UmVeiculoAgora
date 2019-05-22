@@ -128,7 +128,7 @@ public class Controller {
                     catch(NumberFormatException | IndexOutOfBoundsException e){error = "Input Inválido";}
                     break;
 
-                case Autonomy_Car:
+                case Cheapest_Near_Car:
                     try{
                         CheapestNearCar walkCar = menu.walkingDistanceShow(error);
 
@@ -145,9 +145,8 @@ public class Controller {
                     catch (InvalidNewRental e){error = "New rental inválido";}
                     catch (NoCarAvaliableException e) { error = "No cars availables"; }
                     break;
-                    /*
 
-                case Cheapest_Near_Car:
+                case Autonomy_Car:
                     try{
                         AutonomyCar autoCar = menu.autonomyCarShow(error);
 
@@ -163,7 +162,7 @@ public class Controller {
                     catch (InvalidNewRental e){error = "New rental inválido";}
                     catch (NoCarAvaliableException e) { error = "No cars availables"; }
                     break;
-*/
+
                 case Add_Car:
                     try {
                         RegisterCar registerCar = menu.newRegisterCar(error);
