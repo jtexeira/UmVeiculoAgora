@@ -21,7 +21,7 @@ public class Car implements Serializable {
 
     private boolean isAvailable;
 
-    private int range;
+    private double range;
     private int rating;
     private int nRatings;
 
@@ -64,7 +64,7 @@ public class Car implements Serializable {
                     return CarType.hybrid;
                 case "Todos":
                     return CarType.any;
-            }
+                }
             throw new UnknownCarTypeException();
         }
     }
@@ -112,7 +112,7 @@ public class Car implements Serializable {
         return this.position;
     }
 
-    int getRange() {
+    double getRange() {
         return this.range;
     }
 
@@ -183,5 +183,15 @@ public class Car implements Serializable {
 
     public Car clone() {
         return new Car(this);
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder()
+                .append(this.getNumberPlate()).append("\n")
+                .append(String.format("%.2f", this.getRange())).append("\n")
+                .append(String.format("%.2f", this.getBasePrice())).append("\n")
+                .append(this.isAvailable).append("\n")
+                .append(this.getRating()).toString();
     }
 }
