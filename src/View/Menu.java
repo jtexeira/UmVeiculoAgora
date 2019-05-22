@@ -108,8 +108,7 @@ public class Menu implements IMenu {
 
         Table<String> tab = new Table<>(valTab,linLabl,colLabl);
         out.println(tab);
-        out.println();
-        out.println("\tR[pos] -> Refill car / C[pos] [price] -> Change Price / D[pos] -> Toggle Availability");
+        out.println("\tR[pos] -> Refill car\n\tC[pos] [price] -> Change Price\n\tD[pos] -> Toggle Availability");
 
         return scanner.nextLine().toLowerCase();
 

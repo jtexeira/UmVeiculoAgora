@@ -94,6 +94,7 @@ public class Controller {
                     Owner owner = (Owner)this.user;
                     ArrayList<Rental> lR = owner.getPending();
                     for(int i = 0; i < lR.size() && i < 4; i++){
+                        out.print("\033\143");
                         out.println(i + 1 + ".");
                         out.println(lR.get(i));
                     }
@@ -161,7 +162,7 @@ public class Controller {
                             case 'r':
                                 ownerCar.getCars().get(Integer.parseInt(action.substring(1)) - 1).refil();
                                 break;
-                            case'C':
+                            case'c':
                                 String [] s = action.substring(1).split(" ");
                                 if (s.length != 2)
                                     throw new InvalidNumberOfArgumentsException();
@@ -182,6 +183,7 @@ public class Controller {
                     catch (IndexOutOfBoundsException e){ error = "Valor de carro inválido"; }
                     catch (NumberFormatException e){ error = "Posição inválida"; }
                     catch (InvalidNumberOfArgumentsException e) {error = "Invalid number of parameters";}
+                    break;
 
                     default:
                         out.println(menu);
