@@ -50,6 +50,14 @@ public class UMCarroJa implements Serializable {
         this.rent(r);
     }
 
+    public Rental rental(Point dest, double range, Car.CarType a, Client c)
+            throws NoCarAvaliableException {
+        Car car = cars.getCar(dest, range, a);
+        Rental r = new Rental(car, c, dest);
+        car.pendingRental(r);
+        return r;
+    }
+
     //Range a pe
     public Rental rental(Client c, Point dest, double range, Car.CarType a)
             throws NoCarAvaliableException{
