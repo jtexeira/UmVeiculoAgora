@@ -1,8 +1,7 @@
 package View;
 
-import Exceptions.InvalidNewRegister;
-import Exceptions.InvalidNewRental;
-import Model.Car;
+import Exceptions.InvalidNewRegisterException;
+import Exceptions.InvalidNewRentalException;
 import Model.Rental;
 import Utils.Point;
 import Utils.StringBetter;
@@ -113,7 +112,7 @@ public class Menu{
         return scanner.nextLine().toLowerCase();
     }
 
-    public AutonomyCar autonomyCarShow(String error) throws InvalidNewRental{
+    public AutonomyCar autonomyCarShow(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
@@ -131,12 +130,12 @@ public class Menu{
             out.println("y:");
             y = scanner.nextDouble();
         } catch (InputMismatchException e) {
-            throw new InvalidNewRental();
+            throw new InvalidNewRentalException();
         }
         return new AutonomyCar(new Point(x, y), range, carType);
     }
 
-    public CheapestNearCar walkingDistanceShow(String error) throws InvalidNewRental{
+    public CheapestNearCar walkingDistanceShow(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
@@ -154,7 +153,7 @@ public class Menu{
             out.println("y:");
             y = scanner.nextDouble();
         } catch (InputMismatchException e) {
-            throw new InvalidNewRental();
+            throw new InvalidNewRentalException();
         }
         return new CheapestNearCar(new Point(x, y), walk, carType);
     }
@@ -188,7 +187,7 @@ public class Menu{
         scanner.nextLine();
     }
 
-    public RentCarSimple simpleRentCarShow(String error) throws InvalidNewRental{
+    public RentCarSimple simpleRentCarShow(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
@@ -204,7 +203,7 @@ public class Menu{
             out.println("y:");
             y = scanner.nextDouble();
         } catch (InputMismatchException e) {
-            throw new InvalidNewRental();
+            throw new InvalidNewRentalException();
         }
         return new RentCarSimple(new Point(x, y), carType);
     }
@@ -222,7 +221,7 @@ public class Menu{
         return new AbstractMap.SimpleEntry<>(user, password);
     }
 
-    public RegisterCar newRegisterCar(String error) throws InvalidNewRegister {
+    public RegisterCar newRegisterCar(String error) throws InvalidNewRegisterException {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
@@ -251,7 +250,7 @@ public class Menu{
             out.println("y:");
             y = scanner.nextDouble();
         } catch (InputMismatchException e) {
-            throw new InvalidNewRegister();
+            throw new InvalidNewRegisterException();
         }
         return new RegisterCar(
                 matricula,
@@ -266,7 +265,7 @@ public class Menu{
 
     }
 
-    public RegisterUser newRegisterUser(String error) throws InvalidNewRegister {
+    public RegisterUser newRegisterUser(String error) throws InvalidNewRegisterException {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
@@ -285,7 +284,7 @@ public class Menu{
             out.println("Nif:");
             nif = scanner.nextInt();
         } catch (InputMismatchException e) {
-            throw new InvalidNewRegister();
+            throw new InvalidNewRegisterException();
         }
         if (this.menu.equals(MenuInd.Registar_Cliente)) {
             try {
@@ -296,7 +295,7 @@ public class Menu{
                 double y = scanner.nextDouble();
                 return new RegisterUser(user, email, pass, adress, nif, new Point(x, y));
             } catch (InputMismatchException e) {
-                throw new InvalidNewRegister();
+                throw new InvalidNewRegisterException();
             }
         }
         else {
