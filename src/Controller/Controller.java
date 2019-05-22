@@ -6,6 +6,7 @@ import Utils.Point;
 import View.Menu;
 import View.ViewModel.RegisterCar;
 import View.ViewModel.RegisterUser;
+import View.ViewModel.RentCarSimple;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -75,36 +76,42 @@ public class Controller {
                     break;
                 case Closest_Car:
                     try{
-                        Rental rental = model.rental((Client)user, new Point(0.d, 0.d), "MaisPerto", Car.CarType.any);
+                        RentCarSimple rent = menu.simpleRentCarShow(error);
+                        Rental rental = model.rental((Client)user, rent.getPoint(), "MaisPerto", rent.getCarType());
                         menu.showRental(rental);
                         menu.back();
+                        error = "";
                     }
-                    catch (UnknownCompareTypeException | NoCarAvaliableException ignored){}
+                    catch (UnknownCompareTypeException e) {}
+                    catch (NoCarAvaliableException e) { error = "No cars availables"; }
+                    catch (InvalidNewRental e){error = "Novo Rental inválido"; }
                     break;
-
                 case Cheapest_Car:
                     try{
-                        Rental rental = model.rental((Client)user, new Point(0.d, 0.d), "MaisBarato", Car.CarType.any);
+                        RentCarSimple rent = menu.simpleRentCarShow(error);
+                        Rental rental = model.rental((Client)user, rent.getPoint(), "MaisBarato", rent.getCarType());
                         menu.showRental(rental);
                         menu.back();
+                        error = "";
                     }
-                    catch (UnknownCompareTypeException | NoCarAvaliableException ignored){}
+                    catch (UnknownCompareTypeException e) {}
+                    catch (NoCarAvaliableException e) { error = "No cars availables"; }
+                    catch (InvalidNewRental e){error = "Novo Rental inválido"; }
                     break;
                 case Review_Rent:
                     Owner owner = (Owner)this.user;
                     ArrayList<Rental> lR = owner.getPending();
-                    for(int i = 0; i < lR.size() && i < 4; i++){
-                        out.print("\033\143");
-                        out.println(i + 1 + ".");
-                        out.println(lR.get(i));
-                    }
-                    String v = scanner.nextLine();
+                    String v = menu.reviewRentShow(
+                            error,
+                            lR.stream()
+                                    .map(Rental::toString)
+                                    .collect(Collectors.toList()));
                     try {
                         switch (v.charAt(0)) {
-                            case 'A':
+                            case 'a':
                                 this.model.rent(lR.get(Integer.parseInt(v.substring(1)) - 1));
                                 break;
-                            case 'R':
+                            case 'r':
                                 owner.refuse(lR.get(Integer.parseInt(v.substring(1)) - 1));
                                 break;
                             case 'b':
@@ -112,7 +119,7 @@ public class Controller {
                                 break;
                         }
                     }
-                    catch(NumberFormatException ignored){}
+                    catch(NumberFormatException | IndexOutOfBoundsException e){error = "Input Inválido";}
                     break;
 
                 case Add_Car:

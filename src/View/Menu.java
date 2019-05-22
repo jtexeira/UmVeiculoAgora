@@ -1,18 +1,20 @@
 package View;
 
 import Exceptions.InvalidNewRegister;
+import Exceptions.InvalidNewRental;
 import Model.Car;
 import Model.Rental;
 import Utils.Point;
 import Utils.StringBetter;
 import View.ViewModel.RegisterCar;
 import View.ViewModel.RegisterUser;
+import View.ViewModel.RentCarSimple;
 
 import java.util.*;
 
 import static java.lang.System.out;
 
-public class Menu implements IMenu {
+public class Menu{
     private MenuInd menu;
     private final Stack<MenuInd> prev;
     private final ArrayList<MenuInd> options;
@@ -111,7 +113,18 @@ public class Menu implements IMenu {
         out.println("\tR[pos] -> Refill car\n\tC[pos] [price] -> Change Price\n\tD[pos] -> Toggle Availability");
 
         return scanner.nextLine().toLowerCase();
+    }
 
+    public String reviewRentShow(String error, List<String> lR){
+        Scanner scanner = new Scanner(System.in);
+        out.print("\033\143");
+        out.println(this.createHeader());
+        out.println(new StringBetter(error).under().toString());
+        for(int i = 0; i < lR.size() && i < 4; i++) {
+            out.println(i + 1 + ".");
+            out.println(lR.get(i));
+        }
+        return scanner.nextLine();
     }
 
     public void top10ClientsShow (List<List<String>> valTab){
@@ -129,7 +142,27 @@ public class Menu implements IMenu {
         out.println(tab);
 
         scanner.nextLine();
+    }
 
+    public RentCarSimple simpleRentCarShow(String error) throws InvalidNewRental{
+        Scanner scanner = new Scanner(System.in);
+        out.print("\033\143");
+        out.println(this.createHeader());
+        out.println();
+        out.println(new StringBetter(error).under().toString());
+        out.println("Tipo do Carro: [electric, gas, hybrid or any]");
+        String carType = scanner.nextLine();
+        double x, y;
+        try {
+            out.println("UMCarroJa wants to know your location!");
+            out.println("x:");
+            x = scanner.nextDouble();
+            out.println("y:");
+            y = scanner.nextDouble();
+        } catch (InputMismatchException e) {
+            throw new InvalidNewRental();
+        }
+        return new RentCarSimple(new Point(x, y), carType);
     }
 
     public AbstractMap.SimpleEntry<String, String> newLogin(String error) {
