@@ -4,9 +4,7 @@ import Exceptions.*;
 import Model.*;
 import Utils.Point;
 import View.Menu;
-import View.ViewModel.RegisterCar;
-import View.ViewModel.RegisterUser;
-import View.ViewModel.RentCarSimple;
+import View.ViewModel.*;
 
 import java.lang.reflect.Array;
 import java.util.*;
@@ -77,7 +75,11 @@ public class Controller {
                 case Closest_Car:
                     try{
                         RentCarSimple rent = menu.simpleRentCarShow(error);
-                        Rental rental = model.rental((Client)user, rent.getPoint(), "MaisPerto", rent.getCarType());
+                        Rental rental = model.rental(
+                                (Client)user,
+                                rent.getPoint(),
+                                "MaisPerto",
+                                rent.getCarType());
                         menu.showRental(rental);
                         menu.back();
                         error = "";
@@ -89,7 +91,11 @@ public class Controller {
                 case Cheapest_Car:
                     try{
                         RentCarSimple rent = menu.simpleRentCarShow(error);
-                        Rental rental = model.rental((Client)user, rent.getPoint(), "MaisBarato", rent.getCarType());
+                        Rental rental = model.rental(
+                                (Client)user,
+                                rent.getPoint(),
+                                "MaisBarato",
+                                rent.getCarType());
                         menu.showRental(rental);
                         menu.back();
                         error = "";
@@ -122,6 +128,42 @@ public class Controller {
                     catch(NumberFormatException | IndexOutOfBoundsException e){error = "Input Inválido";}
                     break;
 
+                case Autonomy_Car:
+                    try{
+                        CheapestNearCar walkCar = menu.walkingDistanceShow(error);
+
+                        Rental rental = model.rental(
+                                (Client)user,
+                                walkCar.getPoint(),
+                                walkCar.getWalkDistance(),
+                                walkCar.getType()
+                        );
+
+                        menu.showRental(rental);
+                        error = "";
+                    }
+                    catch (InvalidNewRental e){error = "New rental inválido";}
+                    catch (NoCarAvaliableException e) { error = "No cars availables"; }
+                    break;
+                    /*
+
+                case Cheapest_Near_Car:
+                    try{
+                        AutonomyCar autoCar = menu.autonomyCarShow(error);
+
+                        Rental rental = model.rental(
+                                autoCar.getPoint(),
+                                autoCar.getAutonomy(),
+                                autoCar.getType(),
+                                (Client)user);
+
+                        menu.showRental(rental);
+                        error = "";
+                    }
+                    catch (InvalidNewRental e){error = "New rental inválido";}
+                    catch (NoCarAvaliableException e) { error = "No cars availables"; }
+                    break;
+*/
                 case Add_Car:
                     try {
                         RegisterCar registerCar = menu.newRegisterCar(error);

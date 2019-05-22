@@ -6,9 +6,7 @@ import Model.Car;
 import Model.Rental;
 import Utils.Point;
 import Utils.StringBetter;
-import View.ViewModel.RegisterCar;
-import View.ViewModel.RegisterUser;
-import View.ViewModel.RentCarSimple;
+import View.ViewModel.*;
 
 import java.util.*;
 
@@ -113,6 +111,52 @@ public class Menu{
         out.println("\tR[pos] -> Refill car\n\tC[pos] [price] -> Change Price\n\tD[pos] -> Toggle Availability");
 
         return scanner.nextLine().toLowerCase();
+    }
+
+    public AutonomyCar autonomyCarShow(String error) throws InvalidNewRental{
+        Scanner scanner = new Scanner(System.in);
+        out.print("\033\143");
+        out.println(this.createHeader());
+        out.println(new StringBetter(error).under().toString());
+        out.println("Tipo do Carro: [electric, gas, hybrid or any]");
+        String carType = scanner.nextLine();
+        double x, y;
+        int range;
+        try {
+            out.println("Alcance:");
+            range = scanner.nextInt();
+            out.println("UMCarroJa wants to know your location!");
+            out.println("x:");
+            x = scanner.nextDouble();
+            out.println("y:");
+            y = scanner.nextDouble();
+        } catch (InputMismatchException e) {
+            throw new InvalidNewRental();
+        }
+        return new AutonomyCar(new Point(x, y), range, carType);
+    }
+
+    public CheapestNearCar walkingDistanceShow(String error) throws InvalidNewRental{
+        Scanner scanner = new Scanner(System.in);
+        out.print("\033\143");
+        out.println(this.createHeader());
+        out.println(new StringBetter(error).under().toString());
+        out.println("Tipo do Carro: [electric, gas, hybrid or any]");
+        String carType = scanner.nextLine();
+        double x, y;
+        int walk;
+        try {
+            out.println("Distância a andar a pé:");
+            walk = scanner.nextInt();
+            out.println("UMCarroJa wants to know your location!");
+            out.println("x:");
+            x = scanner.nextDouble();
+            out.println("y:");
+            y = scanner.nextDouble();
+        } catch (InputMismatchException e) {
+            throw new InvalidNewRental();
+        }
+        return new CheapestNearCar(new Point(x, y), walk, carType);
     }
 
     public String reviewRentShow(String error, List<String> lR){
