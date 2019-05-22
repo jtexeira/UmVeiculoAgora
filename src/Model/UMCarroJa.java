@@ -58,6 +58,17 @@ public class UMCarroJa implements Serializable {
         return r;
     }
 
+    public Rental rental(Point dest, String numberPlate, Client c) throws InvalidCarException, NoCarAvaliableException {
+        Car car = this.cars.searchCar(numberPlate);
+
+        if(car.getPosition().distanceBetweenPoints(dest) > car.getRange())
+            throw new NoCarAvaliableException();
+
+        Rental r = new Rental(car, c, dest);
+        car.pendingRental(r);
+        return r;
+    }
+
     //Range a pe
     public Rental rental(Client c, Point dest, double range, Car.CarType a)
             throws NoCarAvaliableException{
