@@ -2,6 +2,7 @@ package View;
 
 import Exceptions.InvalidNewRegisterException;
 import Exceptions.InvalidNewRentalException;
+import Exceptions.InvalidRatingException;
 import Model.Rental;
 import Utils.Point;
 import Utils.StringBetter;
@@ -56,7 +57,9 @@ public class Menu{
         Car_Overview,
         Register_Cost,
         Add_Car,
-        Top_10_Clients
+        Top_10_Clients,
+        Alugueres,
+        Pending_Ratings_Cli
     }
 
     public Menu() {
@@ -89,11 +92,7 @@ public class Menu{
     }
 
     public String carOverviewShow (String error, List<List<String>> valTab){
-        Scanner scanner = new Scanner(System.in);
-        out.print("\033\143");
-        out.println(this.createHeader());
-        out.println(new StringBetter(error).under().toString());
-        out.println();
+        createMenuHeader(error);
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("Matricula");
         colLabl.add("Autonomia");
@@ -109,7 +108,7 @@ public class Menu{
         out.println(tab);
         out.println("\tR[pos] -> Refill car\n\tC[pos] [price] -> Change Price\n\tD[pos] -> Toggle Availability");
 
-        return scanner.nextLine().toLowerCase();
+        return new Scanner(System.in).nextLine().toLowerCase();
     }
 
     public AutonomyCar autonomyCarShow(String error) throws InvalidNewRentalException {
@@ -222,11 +221,8 @@ public class Menu{
     }
 
     public RegisterCar newRegisterCar(String error) throws InvalidNewRegisterException {
+        createMenuHeader(error);
         Scanner scanner = new Scanner(System.in);
-        out.print("\033\143");
-        out.println(this.createHeader());
-        out.println(new StringBetter(error).under().toString());
-        out.println();
         out.println("Matricula:");
         String matricula = scanner.nextLine();
         out.println("Marca:");
@@ -266,11 +262,8 @@ public class Menu{
     }
 
     public RegisterUser newRegisterUser(String error) throws InvalidNewRegisterException {
+        createMenuHeader(error);
         Scanner scanner = new Scanner(System.in);
-        out.print("\033\143");
-        out.println(this.createHeader());
-        out.println(new StringBetter(error).under().toString());
-        out.println();
         out.println("Nome de Utilizador:");
         String user = scanner.nextLine();
         out.println("Email:");
@@ -342,12 +335,43 @@ public class Menu{
         return this;
     }
 
+    public AbstractMap.SimpleEntry<Integer, Integer> pendingRateShow(String error, String pending, int total)
+            throws InvalidRatingException {
+        Scanner scanner = new Scanner(System.in);
+        createMenuHeader(error);
+        out.println(total + ".");
+        out.println(pending);
+        out.println();
+        try {
+            out.println("Rating de Owner");
+            int owner = scanner.nextInt();
+            if (owner < 0 || owner > 100)
+                throw new InvalidRatingException();
+            out.println("Rating de Carro");
+            int carro = scanner.nextInt();
+            if (carro < 0 || carro > 100)
+                throw new InvalidRatingException();
+            return new AbstractMap.SimpleEntry<>(owner, carro);
+        }
+        catch (InputMismatchException e){
+            throw new InvalidRatingException();
+        }
+
+    }
+
+    private void createMenuHeader(String error) {
+        out.print("\033\143");
+        out.println(this.createHeader());
+        out.println(new StringBetter(error).under().toString());
+        out.println();
+    }
+
     public boolean getRun() {
         return this.run;
     }
 
     public Menu selectOption(int i) {
-        if (this.options.size() > i - 1) {
+        if (this.options.size() > i - 1 && i > 0) {
             this.prev.push(this.menu);
             this.menu = this.options.get(i - 1);
             this.correctMenu();
@@ -421,7 +445,7 @@ public class Menu{
                 r += "Carro mais barato";
                 break;
             case Cheapest_Near_Car:
-                r += "Carro mais barato dentro de uma distância que estão dispostos a andar a pé";
+                r += "Carro mais barato dentro de uma distância";
                 break;
             case Specific_Car:
                 r += "Carro específico";
@@ -442,8 +466,13 @@ public class Menu{
                 r += "Registar quanto custou a viagem.";
                 break;
             case Top_10_Clients:
-                r += "10 Melhores clientes";
+                r += "UMCarroJá Challenge";
                 break;
+            case Alugueres:
+                r += "Alugar um carro";
+            case Pending_Ratings_Cli:
+                r += "Avaliações pendentes";
+
         }
         return r;
     }
@@ -466,12 +495,17 @@ public class Menu{
             case Cliente:
                 this.options.clear();
                 this.options.add(MenuInd.Client_Stats);
+                this.options.add(MenuInd.Pending_Ratings_Cli);
+                this.options.add(MenuInd.Alugueres);
+                this.options.add(MenuInd.Top_10_Clients);
+                break;
+            case Alugueres:
+                this.options.clear();
                 this.options.add(MenuInd.Closest_Car);
                 this.options.add(MenuInd.Cheapest_Car);
                 this.options.add(MenuInd.Cheapest_Near_Car);
                 this.options.add(MenuInd.Specific_Car);
                 this.options.add(MenuInd.Autonomy_Car);
-                this.options.add(MenuInd.Top_10_Clients);
                 break;
             case Proprietario:
                 this.options.clear();
@@ -503,6 +537,12 @@ public class Menu{
                 this.options.clear();
                 break;
             case Register_Cost:
+                this.options.clear();
+                break;
+            case Client_Stats:
+                this.options.clear();
+                break;
+            case Pending_Ratings_Cli:
                 this.options.clear();
                 break;
         }

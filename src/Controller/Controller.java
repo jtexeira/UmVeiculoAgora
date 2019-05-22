@@ -234,6 +234,23 @@ public class Controller {
                     catch (InvalidNumberOfArgumentsException e) {error = "Invalid number of parameters";}
                     break;
 
+                case Pending_Ratings_Cli:
+                    try {
+                        Client cli = (Client) user;
+                        if (cli.getPendingRates().size() == 0)
+                            this.menu.back();
+                        ArrayList<Rental> pR = cli.getPendingRates();
+
+                        AbstractMap.SimpleEntry<Integer, Integer> r =
+                                this.menu.pendingRateShow(error, pR.get(0), pR.size());
+
+                        cli.rate(error, pR.get(0), carRating, ownerRating);
+
+                        error = "";
+                    }
+
+                    catch (InvalidRatingException e){error = "Parametros Invalidos";}
+
                     default:
                         out.println(menu);
                         menu.parser(scanner.nextLine());
