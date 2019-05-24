@@ -126,6 +126,7 @@ public class Controller {
                                 this.menu.back();
                                 break;
                         }
+                        error = "";
                     }
                     catch(NumberFormatException | IndexOutOfBoundsException e){error = "Input Inválido";}
                     break;
@@ -141,12 +142,12 @@ public class Controller {
                                 walkCar.getType()
                         );
 
-                        menu.showRental(rental);
+                        this.menu.showRental(rental);
+                        this.menu.back();
                         error = "";
                     }
                     catch (InvalidNewRentalException e){error = "New rental inválido";}
-                    catch (NoCarAvaliableException e) { error = "No cars availables"; }
-                    this.menu.back();
+                    catch (NoCarAvaliableException e)  {error = "No cars availables"; }
                     break;
 
                 case Autonomy_Car:
@@ -160,11 +161,11 @@ public class Controller {
                                 (Client)user);
 
                         menu.showRental(rental);
+                        this.menu.back();
                         error = "";
                     }
                     catch (InvalidNewRentalException e){error = "New rental inválido";}
                     catch (NoCarAvaliableException e) { error = "No cars availables"; }
-                    this.menu.back();
                     break;
 
                 case Specific_Car:
@@ -175,13 +176,10 @@ public class Controller {
                         this.menu.back();
                         error = "";
                     }
-                    catch (NoCarAvaliableException e) {
-                        error = "Carro não está disponível";
-                    } catch (InvalidCarException e) {
-                        error = "Carro não existe";
-                    } catch (InvalidNewRentalException e) {
-                        error = "Invalid Parameters";
-                    }
+                    catch (NoCarAvaliableException e) { error = "Carro não está disponível"; }
+                    catch (InvalidCarException e) { error = "Carro não existe"; }
+                    catch (InvalidNewRentalException e) { error = "Invalid Parameters"; }
+                    break;
 
                 case Add_Car:
                     try {
@@ -201,7 +199,6 @@ public class Controller {
                         menu.back();
                         error = "";
                     }
-
                     catch (InvalidNewRegisterException e){ error = "Parametros Inválidos"; }
                     catch (CarExistsException e){ error = "Carro já existe"; }
                     catch (InvalidUserException ignored) {}
