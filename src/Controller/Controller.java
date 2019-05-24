@@ -120,7 +120,7 @@ public class Controller {
                                 this.model.rent(lR.get(Integer.parseInt(v.substring(1)) - 1));
                                 break;
                             case 'r':
-                                owner.refuse(lR.get(Integer.parseInt(v.substring(1)) - 1));
+                                this.model.refuse(owner, lR.get(Integer.parseInt(v.substring(1)) - 1));
                                 break;
                             case 'b':
                                 this.menu.back();
@@ -226,19 +226,16 @@ public class Controller {
                             case ' ':
                                 break;
                             case 'r':
-                                ownerCar.getCars().get(Integer.parseInt(action.substring(1)) - 1).refil();
+                                model.refil(ownerCar, Integer.parseInt(action.substring(1)) - 1);
                                 break;
                             case'c':
                                 String [] s = action.substring(1).split(" ");
                                 if (s.length != 2)
                                     throw new InvalidNumberOfArgumentsException();
-                                ownerCar
-                                        .getCars()
-                                        .get(Integer.parseInt(s[0]) - 1)
-                                        .setBasePrice(Double.parseDouble(s[1]));
+                                model.setBasePrice(ownerCar, Integer.parseInt(s[0]) - 1, Double.parseDouble(s[1]));
                                 break;
                             case 'd':
-                                ownerCar.getCars().get(Integer.parseInt(action.substring(1)) - 1).swapState();
+                                model.swapState(ownerCar, Integer.parseInt(action.substring(1)) - 1);
                                 break;
                             case 'b':
                                 this.menu.back();
@@ -261,11 +258,12 @@ public class Controller {
                             this.menu.back();
                             break;
                         }
+                        List<Rental> pR = cli.getPendingRates();
 
                         AbstractMap.SimpleEntry<Integer, Integer> r =
                                 this.menu.pendingRateShow(error, pR.get(0).toString(), pR.size());
-
-                        cli.rate(pR.get(0), r.getKey(), r.getValue());
+                      
+                        model.rate(cli, pR.get(0), r.getKey(), r.getValue());
 
                         error = "";
                     }
