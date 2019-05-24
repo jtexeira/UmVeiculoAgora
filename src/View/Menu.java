@@ -166,7 +166,7 @@ public class Menu{
             out.println(i + 1 + ".");
             out.println(lR.get(i));
         }
-        return scanner.nextLine();
+        return scanner.nextLine().toLowerCase();
     }
 
     public void top10ClientsShow (List<List<String>> valTab){
@@ -470,8 +470,10 @@ public class Menu{
                 break;
             case Alugueres:
                 r += "Alugar um carro";
+                break;
             case Pending_Ratings_Cli:
                 r += "Avaliações pendentes";
+                break;
 
         }
         return r;
@@ -516,33 +518,16 @@ public class Menu{
                 this.options.add(MenuInd.Add_Car);
                 break;
             case Closest_Car:
-                this.options.clear();
-                break;
             case Cheapest_Car:
-                this.options.clear();
-                break;
             case Cheapest_Near_Car:
-                this.options.clear();
-                break;
             case Specific_Car:
-                this.options.clear();
-                break;
             case Autonomy_Car:
-                this.options.clear();
-                break;
             case Car_Overview:
-                this.options.clear();
-                break;
             case Review_Rent:
-                this.options.clear();
-                break;
             case Register_Cost:
-                this.options.clear();
-                break;
             case Client_Stats:
-                this.options.clear();
-                break;
             case Pending_Ratings_Cli:
+            case Owner_Stats:
                 this.options.clear();
                 break;
         }

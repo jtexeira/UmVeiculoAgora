@@ -105,6 +105,10 @@ public class Controller {
                 case Review_Rent:
                     Owner owner = (Owner)this.user;
                     ArrayList<Rental> lR = owner.getPending();
+                    if (lR.size() == 0){
+                        this.menu.back();
+                        break;
+                    }
                     String v = menu.reviewRentShow(
                             error,
                             lR.stream()
@@ -237,19 +241,23 @@ public class Controller {
                 case Pending_Ratings_Cli:
                     try {
                         Client cli = (Client) user;
-                        if (cli.getPendingRates().size() == 0)
+
+                        List<Rental> pR = cli.getPendingRates();
+
+                        if (pR.size() == 0) {
                             this.menu.back();
-                        ArrayList<Rental> pR = cli.getPendingRates();
+                            break;
+                        }
 
                         AbstractMap.SimpleEntry<Integer, Integer> r =
-                                this.menu.pendingRateShow(error, pR.get(0), pR.size());
+                                this.menu.pendingRateShow(error, pR.get(0).toString(), pR.size());
 
-                        cli.rate(error, pR.get(0), carRating, ownerRating);
+                        cli.rate(pR.get(0), r.getKey(), r.getValue());
 
                         error = "";
                     }
-
                     catch (InvalidRatingException e){error = "Parametros Invalidos";}
+                    break;
 
                     default:
                         out.println(menu);
