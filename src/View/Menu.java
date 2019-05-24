@@ -370,7 +370,7 @@ public class Menu{
         for (MenuInd val : this.prev)
             strHeader.append(val.name()).append("/");
 
-        return strHeader.append(this.menu.name()).append("--\n").red().toString());
+        return strHeader.append(this.menu.name()).append("--\n").red().toString();
     }
 
     private String menuOptionText(int i) {
