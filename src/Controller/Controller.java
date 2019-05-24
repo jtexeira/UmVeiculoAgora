@@ -167,6 +167,22 @@ public class Controller {
                     this.menu.back();
                     break;
 
+                case Specific_Car:
+                    try {
+                        SpecificCar sc = this.menu.specificRentCarShow(error);
+                        Rental rental = this.model.rental(sc.getPoint(), sc.getNumberPlate(), (Client)user);
+                        this.menu.showRental(rental);
+                        this.menu.back();
+                        error = "";
+                    }
+                    catch (NoCarAvaliableException e) {
+                        error = "Carro não está disponível";
+                    } catch (InvalidCarException e) {
+                        error = "Carro não existe";
+                    } catch (InvalidNewRentalException e) {
+                        error = "Invalid Parameters";
+                    }
+
                 case Add_Car:
                     try {
                         RegisterCar registerCar = menu.newRegisterCar(error);

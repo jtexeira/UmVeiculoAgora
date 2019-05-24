@@ -186,17 +186,35 @@ public class Menu{
         scanner.nextLine();
     }
 
-    public RentCarSimple simpleRentCarShow(String error) throws InvalidNewRentalException {
+    public SpecificCar specificRentCarShow(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
         out.println();
         out.println(new StringBetter(error).under().toString());
+        out.println("Matricula:");
+        String carType = scanner.nextLine();
+        double x, y;
+        try {
+            out.println("UMCarroJa wants to know your destination!");
+            out.println("x:");
+            x = scanner.nextDouble();
+            out.println("y:");
+            y = scanner.nextDouble();
+        } catch (InputMismatchException e) {
+            throw new InvalidNewRentalException();
+        }
+        return new SpecificCar(new Point(x, y), carType);
+    }
+
+    public RentCarSimple simpleRentCarShow(String error) throws InvalidNewRentalException {
+        Scanner scanner = new Scanner(System.in);
+        this.createMenuHeader(error);
         out.println("Tipo do Carro: [electric, gas, hybrid or any]");
         String carType = scanner.nextLine();
         double x, y;
         try {
-            out.println("UMCarroJa wants to know your location!");
+            out.println("UMCarroJa wants to know your destination!");
             out.println("x:");
             x = scanner.nextDouble();
             out.println("y:");
