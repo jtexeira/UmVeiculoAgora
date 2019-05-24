@@ -220,7 +220,8 @@ public class Menu{
         this.createMenuHeader(error);
         out.println("User:");
         String user = scanner.nextLine();
-        String password = new StringBetter().readPassword("Password:\n").toString();
+        out.println("Password:");
+        String password = new StringBetter().readPassword().toString();
 
         return new AbstractMap.SimpleEntry<>(user, password);
     }

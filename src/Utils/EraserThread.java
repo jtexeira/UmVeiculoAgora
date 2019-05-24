@@ -5,9 +5,7 @@ import java.io.*;
 class EraserThread implements Runnable {
     private boolean stop;
 
-    public EraserThread(String prompt) {
-        System.out.print(prompt);
-    }
+    public EraserThread() {}
 
     public void run () {
         stop = true;

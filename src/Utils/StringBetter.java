@@ -111,8 +111,8 @@ public class StringBetter implements IStringBetter{
         return new StringBetter(this.str + "\033[?25h");
     }
 
-    public StringBetter readPassword (String prompt) {
-        EraserThread et = new EraserThread(prompt);
+    public StringBetter readPassword () {
+        EraserThread et = new EraserThread();
         Thread mask = new Thread(et);
         mask.start();
 
