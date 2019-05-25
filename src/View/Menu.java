@@ -74,13 +74,9 @@ public class Menu{
         colLabl.add("Preço/km");
         colLabl.add("Disponibilidade");
         colLabl.add("Ratings");
-        ArrayList<String> linLabl = new ArrayList<>();
-        for(int i = 0; i < valTab.size(); i++ )
-            linLabl.add(String.format("%dº", i + 1));
 
+        this.tableDefault(valTab, colLabl);
 
-        Table<String> tab = new Table<>(valTab,linLabl,colLabl);
-        out.println(tab);
         out.println("\tR[pos] -> Refill car\n\tC[pos] [price] -> Change Price\n\tD[pos] -> Toggle Availability");
 
         return new Scanner(System.in).nextLine().toLowerCase();
@@ -95,16 +91,11 @@ public class Menu{
         colLabl.add("Inicio da Viagem");
         colLabl.add("Fim da Viagem");
         colLabl.add("Preço Final");
-        ArrayList<String> linLabl = new ArrayList<>();
-        for(int i = 0; i < valTab.size(); i++ )
-            linLabl.add(String.format("%d", i + 1));
-
-        Table<String> tab = new Table<>(valTab,linLabl,colLabl);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
         out.println(ti.getInicio().format(formatter) + " -> " + ti.getFim().format(formatter));
-        out.println(tab);
+
+        tableDefault(valTab, colLabl);
 
         new Scanner(System.in).nextLine();
     }
@@ -147,12 +138,9 @@ public class Menu{
         colLabl.add("Fim da Viagem");
         colLabl.add("Tempo Estimado");
         colLabl.add("Custo Estimado");
-        ArrayList<String> linLabl = new ArrayList<>();
-        for(int i = 0; i < lR.size(); i++ )
-            linLabl.add(String.format("%dº", i + 1));
 
-        Table<String> tab = new Table<>(lR,linLabl,colLabl);
-        out.println(tab);
+        this.tableDefault(lR, colLabl);
+
         out.println("\tA[pos] -> aprove rental\n\tR[pos] -> refuse rental");
 
         return scanner.nextLine().toLowerCase();
@@ -383,6 +371,15 @@ public class Menu{
             strHeader.append(val.name()).append("/");
 
         return strHeader.append(this.menu.name()).append("--\n").red().toString();
+    }
+
+    private void tableDefault(List<List<String>> valTab, List<String> colLabl){
+        ArrayList<String> linLabl = new ArrayList<>();
+        for(int i = 0; i < valTab.size(); i++ )
+            linLabl.add(String.format("%dº", i + 1));
+
+        Table<String> tab = new Table<>(valTab,linLabl,colLabl);
+        out.println(tab);
     }
 
     private String menuOptionText(int i) {
