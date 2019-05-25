@@ -124,7 +124,7 @@ public class Controller {
                                 this.menu.showRental(rentalReview.toFinalString());
                                 break;
                             case 'r':
-                                this.model.refuse(owner, lR.get(Integer.parseInt(v.substring(1)) - 1));
+                                this.model.refuse(owner, rentalReview);
                                 break;
                             case 'b':
                                 this.menu.back();
