@@ -59,7 +59,6 @@ public class Menu{
         Alugueres_Owner,
         Review_Rent,
         Car_Overview,
-        Register_Cost,
         Add_Car,
         Top_10_Clients,
         Alugueres,
@@ -166,13 +165,23 @@ public class Menu{
         }
     }
 
-    public String reviewRentShow(String error, List<String> lR){
+    public String reviewRentShow(String error, List<List<String>> lR){
         Scanner scanner = new Scanner(System.in);
         this.createMenuHeader(error);
-        for(int i = 0; i < lR.size() && i < 4; i++) {
-            out.println(i + 1 + ".");
-            out.println(lR.get(i));
-        }
+        ArrayList<String> colLabl = new ArrayList<>();
+        colLabl.add("Cliente");
+        colLabl.add("Carro");
+        colLabl.add("Inicio");
+        colLabl.add("Fim");
+        colLabl.add("Custo");
+        ArrayList<String> linLabl = new ArrayList<>();
+        for(int i = 0; i < lR.size(); i++ )
+            linLabl.add(String.format("%dº", i + 1));
+
+        Table<String> tab = new Table<>(lR,linLabl,colLabl);
+        out.println(tab);
+        out.println("\tA[pos] -> aprove rental\n\tR[pos] -> refuse rental");
+
         return scanner.nextLine().toLowerCase();
     }
 
@@ -448,9 +457,6 @@ public class Menu{
             case Review_Rent:
                 r += "Aceitar/rejeitar o aluguer de um determinado cliente;";
                 break;
-            case Register_Cost:
-                r += "Registar quanto custou a viagem.";
-                break;
             case Top_10_Clients:
                 r += "UMCarroJá Challenge";
                 break;
@@ -500,7 +506,6 @@ public class Menu{
                 this.options.add(MenuInd.Alugueres_Owner);
                 this.options.add(MenuInd.Car_Overview);
                 this.options.add(MenuInd.Review_Rent);
-                this.options.add(MenuInd.Register_Cost);
                 this.options.add(MenuInd.Add_Car);
                 break;
             case Closest_Car:
@@ -510,7 +515,6 @@ public class Menu{
             case Autonomy_Car:
             case Car_Overview:
             case Review_Rent:
-            case Register_Cost:
             case Alugueres_Cliente:
             case Pending_Ratings_Cli:
             case Alugueres_Owner:
