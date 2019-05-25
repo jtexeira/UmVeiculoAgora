@@ -78,7 +78,7 @@ public class Controller {
                                 rent.getPoint(),
                                 "MaisPerto",
                                 rent.getCarType());
-                        menu.showRental(rental);
+                        menu.showRental(rental.toString());
                         menu.back();
                         error = "";
                     }
@@ -94,7 +94,7 @@ public class Controller {
                                 rent.getPoint(),
                                 "MaisBarato",
                                 rent.getCarType());
-                        menu.showRental(rental);
+                        menu.showRental(rental.toString());
                         menu.back();
                         error = "";
                     }
@@ -121,8 +121,7 @@ public class Controller {
                         switch (v.charAt(0)) {
                             case 'a':
                                 this.model.rent(rentalReview);
-                                out.println(rentalReview.toFinalString());
-
+                                this.menu.showRental(rentalReview.toFinalString());
                                 break;
                             case 'r':
                                 this.model.refuse(owner, lR.get(Integer.parseInt(v.substring(1)) - 1));
@@ -147,7 +146,7 @@ public class Controller {
                                 walkCar.getType()
                         );
 
-                        this.menu.showRental(rental);
+                        this.menu.showRental(rental.toString());
                         this.menu.back();
                         error = "";
                     }
@@ -165,7 +164,7 @@ public class Controller {
                                 autoCar.getType(),
                                 (Client)user);
 
-                        menu.showRental(rental);
+                        menu.showRental(rental.toString());
                         this.menu.back();
                         error = "";
                     }
@@ -177,7 +176,7 @@ public class Controller {
                     try {
                         SpecificCar sc = this.menu.specificCarRent(error);
                         Rental rental = this.model.rental(sc.getPoint(), sc.getNumberPlate(), (Client)user);
-                        this.menu.showRental(rental);
+                        this.menu.showRental(rental.toString());
                         this.menu.back();
                         error = "";
                     }

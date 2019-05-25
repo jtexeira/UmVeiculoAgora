@@ -57,7 +57,7 @@ public class Menu{
         return this.menu;
     }
 
-    public void showRental(Rental rental) {
+    public void showRental(String rental) {
         Scanner scanner = new Scanner(System.in);
         out.print("\033\143");
         out.println(this.createHeader());
@@ -136,7 +136,8 @@ public class Menu{
         colLabl.add("Carro");
         colLabl.add("Inicio da Viagem");
         colLabl.add("Fim da Viagem");
-        colLabl.add("Tempo Estimado");
+        colLabl.add("Tempo a pé");
+        colLabl.add("Tempo Estimado de Viagem");
         colLabl.add("Custo Estimado");
 
         this.tableDefault(lR, colLabl);
