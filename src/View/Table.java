@@ -2,7 +2,6 @@ package View;
 
 import Utils.StringBetter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Table<T> implements ITable{
@@ -15,17 +14,6 @@ public class Table<T> implements ITable{
         this.linLabl = linLabel;
         this.colLabl = colLabel;
         this.iT = iT;
-        this.builder = new StringBuilder();
-    }
-
-    public boolean isEmpty(){
-        return this.linLabl.isEmpty() || this.colLabl.isEmpty() || this.iT.isEmpty();
-    }
-
-    public Table() {
-        this.linLabl = new ArrayList<>();
-        this.colLabl = new ArrayList<>();
-        this.iT      = new ArrayList<>();
         this.builder = new StringBuilder();
     }
 

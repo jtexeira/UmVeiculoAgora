@@ -30,7 +30,7 @@ public class Point implements Serializable {
     }
 
     public Point clone() {
-        return new Point(this);
+        return new Point(this.x, this.y);
     }
 
     public double distanceBetweenPoints(Point a) {

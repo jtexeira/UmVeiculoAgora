@@ -22,26 +22,6 @@ public class Menu{
     private final ArrayList<MenuInd> options;
     private boolean run;
 
-    public <T> void menuNavigator(Navigator<T> nav) {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            out.print("\033\143");
-            out.println(this.createHeader());
-            out.println(nav);
-            switch (scanner.next().trim().charAt(0)) {
-                case 'n':
-                    nav.next();
-                    break;
-                case 'p':
-                    nav.previous();
-                    break;
-                case 'b':
-                    this.back();
-                    return;
-            }
-        }
-    }
-
     public enum MenuInd {
         Inicial,
         Login,
@@ -67,14 +47,6 @@ public class Menu{
 
     public Menu() {
         this.menu = MenuInd.Inicial;
-        this.prev = new Stack<>();
-        this.options = new ArrayList<>();
-        this.run = true;
-        this.correctMenu();
-    }
-
-    public Menu(MenuInd menuInd) {
-        this.menu = menuInd;
         this.prev = new Stack<>();
         this.options = new ArrayList<>();
         this.run = true;

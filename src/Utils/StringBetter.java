@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class StringBetter implements IStringBetter{
+public class StringBetter{
     private String str;
 
     public StringBetter() {
@@ -19,16 +19,16 @@ public class StringBetter implements IStringBetter{
         return str;
     }
 
-    public StringBetter setStr(String str) {
+    private StringBetter setStr(String str) {
         this.str = str;
         return this;
     }
 
     public StringBetter repeate(int n){
-        String s = "";
+        StringBuilder s = new StringBuilder();
         for(int i = 0; i < n; i++)
-            s += this.str;
-        return new StringBetter(s);
+            s.append(this.str);
+        return new StringBetter(s.toString());
     }
 
     public StringBetter append(String strA){
@@ -99,7 +99,7 @@ public class StringBetter implements IStringBetter{
         return new StringBetter( "\033[5m" + this.str).RESET();
     }
 
-    public StringBetter RESET(){
+    private StringBetter RESET(){
         return new StringBetter(this.str + "\033[0m");
     }
 
@@ -120,7 +120,7 @@ public class StringBetter implements IStringBetter{
         String password = "";
         try {
             password = in.readLine();
-        } catch (IOException e) {}
+        } catch (IOException ignored) {}
         et.stopMasking();
 
         return this.setStr(password);

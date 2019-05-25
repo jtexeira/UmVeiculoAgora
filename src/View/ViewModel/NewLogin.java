@@ -1,8 +1,8 @@
 package View.ViewModel;
 
 public class NewLogin {
-    private String User;
-    private String Password;
+    private final String User;
+    private final String Password;
 
     public NewLogin(String user, String password) {
         User = user;
