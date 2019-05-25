@@ -341,8 +341,7 @@ public class Menu{
         }
     }
 
-    public AbstractMap.SimpleEntry<Integer, Integer> pendingRateShow(String error, String pending, int total)
-            throws InvalidRatingException {
+    public RateOwnerCar pendingRateShow(String error, String pending, int total) throws InvalidRatingException {
         Scanner scanner = new Scanner(System.in);
         createMenuHeader(error);
         out.println(total + ".");
@@ -357,7 +356,7 @@ public class Menu{
             int carro = scanner.nextInt();
             if (carro < 0 || carro > 100)
                 throw new InvalidRatingException();
-            return new AbstractMap.SimpleEntry<>(owner, carro);
+            return new RateOwnerCar(owner, carro);
         }
         catch (InputMismatchException e){
             throw new InvalidRatingException();
@@ -377,17 +376,6 @@ public class Menu{
         if (this.menu.equals(MenuInd.Login) || this.menu.equals(MenuInd.Register))
             this.back();
         return this;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append("\033\143");
-        s.append(this.createHeader()).append("\n\n");
-
-        for (int i = 0; i < this.options.size(); i++)
-            s.append(i + 1).append("- ").append(this.menuOptionText(i)).append("\n");
-        return s.toString();
     }
 
     private void createMenuHeader(String error) {
@@ -529,5 +517,16 @@ public class Menu{
                 this.options.clear();
                 break;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append("\033\143");
+        s.append(this.createHeader()).append("\n\n");
+
+        for (int i = 0; i < this.options.size(); i++)
+            s.append(i + 1).append("- ").append(this.menuOptionText(i)).append("\n");
+        return s.toString();
     }
 }

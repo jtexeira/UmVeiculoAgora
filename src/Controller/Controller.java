@@ -258,10 +258,9 @@ public class Controller {
                             break;
                         }
 
-                        AbstractMap.SimpleEntry<Integer, Integer> r =
-                                this.menu.pendingRateShow(error, pR.get(0).toString(), pR.size());
+                        RateOwnerCar r = this.menu.pendingRateShow(error, pR.get(0).toString(), pR.size());
                       
-                        model.rate(cli, pR.get(0), r.getKey(), r.getValue());
+                        model.rate(cli, pR.get(0), r.getOwnerRate(), r.getCarRate());
 
                         error = "";
                     }
