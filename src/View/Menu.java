@@ -95,7 +95,7 @@ public class Menu{
     }
 
     public String carOverviewShow (String error, List<List<String>> valTab){
-        createMenuHeader(error);
+        this.createMenuHeader(error);
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("Matricula");
         colLabl.add("Autonomia");
@@ -122,7 +122,7 @@ public class Menu{
         colLabl.add("Owner");
         colLabl.add("Inicio da Viagem");
         colLabl.add("Fim da Viagem");
-        colLabl.add("Preço");
+        colLabl.add("Preço estimado");
         ArrayList<String> linLabl = new ArrayList<>();
         for(int i = 0; i < valTab.size(); i++ )
             linLabl.add(String.format("%d", i + 1));
@@ -171,9 +171,10 @@ public class Menu{
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("Cliente");
         colLabl.add("Carro");
-        colLabl.add("Inicio");
-        colLabl.add("Fim");
-        colLabl.add("Custo");
+        colLabl.add("Inicio da Viagem");
+        colLabl.add("Fim da Viagem");
+        colLabl.add("Tempo Estimado");
+        colLabl.add("Custo Estimado");
         ArrayList<String> linLabl = new ArrayList<>();
         for(int i = 0; i < lR.size(); i++ )
             linLabl.add(String.format("%dº", i + 1));

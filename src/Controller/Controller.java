@@ -121,6 +121,7 @@ public class Controller {
                         switch (v.charAt(0)) {
                             case 'a':
                                 this.model.rent(rentalReview);
+                                out.println(rentalReview.toFinalString());
 
                                 break;
                             case 'r':
