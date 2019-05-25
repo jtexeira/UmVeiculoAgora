@@ -64,14 +64,27 @@ carros e alugueres. E tambem a grande ponte de comunicacao com o exterior
 do modelo, permitindo assim que nao haja interacao direta do exterior com
 as classes.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{hierarquiaUmCarroJa.png}
+    \caption{Hierarquia de Classes do \textbf{UmCarroJa}}
+\end{figure}
+
+
 \subsection{User}
 
 Esta e a classe com a informacao contida por qualquer user do sistema,
 e metodos comuns tanto aos clientes como aos owners.
 
-\subsection{Cliente}
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.5]{hierarquiaUser.png}
+    \caption{Hierarquia de Classes do \textbf{User}}
+\end{figure}
 
-Esta classe e referente ao cliente que pode criar alugueres, contendo
+\subsection{Client}
+
+Esta classe e referente ao user que pode criar alugueres, contendo
 esta um Ponto, correspondete a posicao em que se encontra e alugueres
 que ainda nao foram avaliados.
 
@@ -81,11 +94,23 @@ Esta classe e relativa ao utilizador que tem os seus carros para aluguer,
 e este tem informacao sobre os carros que possui e tambem os alugueres
 que ainda nao avaliou
 
+\subsection{Users}
+
+Esta classe contem a informacao de todos os utilizadores do sistema.
+
 \subsection{Car}
 
 Esta classe representa uma viatura, onde tem todas as suas informacoes,
 desde autonomia, quem e o seu proprietario, marca e matricula.
 
+\subsection{Cars}
+
+Esta classe trata de guardar todos os carros existentes no sistema, bem
+como procurar carros conforme as condicoes dadas para efetuar um aluguer.
+
+\subsection{Rental}
+
+Esta classe contem todos os metodos para gerar e tratar um aluguer
 \section{View}
 
 \subsection{Menu}
