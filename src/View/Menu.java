@@ -50,7 +50,7 @@ public class Menu{
         this.prev = new Stack<>();
         this.options = new ArrayList<>();
         this.run = true;
-        this.correctMenu();
+        this.pickChildMenus();
     }
 
     public MenuInd getMenu() {
@@ -67,7 +67,7 @@ public class Menu{
     }
 
     public String carOverviewShow (String error, List<List<String>> valTab){
-        this.createMenuHeader(error);
+        this.displayMenuHeader(error);
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("Matricula");
         colLabl.add("Autonomia");
@@ -83,7 +83,7 @@ public class Menu{
     }
 
     public void rentalHistoryShow (TimeInterval ti, List<List<String>> valTab){
-        this.createMenuHeader("");
+        this.displayMenuHeader("");
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("Data");
         colLabl.add("Carro");
@@ -102,7 +102,7 @@ public class Menu{
 
     public AutonomyCar autonomyCarRent(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
-        this.createMenuHeader(error);
+        this.displayMenuHeader(error);
         out.println("Tipo do Carro: [electric, gas, hybrid or any]");
         String carType = scanner.nextLine();
         try {
@@ -116,7 +116,7 @@ public class Menu{
 
     public CheapestNearCar walkingDistanceRent(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
-        this.createMenuHeader(error);
+        this.displayMenuHeader(error);
         out.println("Tipo do Carro: [electric, gas, hybrid or any]");
         String carType = scanner.nextLine();
         try {
@@ -130,7 +130,7 @@ public class Menu{
 
     public String reviewRentShow(String error, List<List<String>> lR){
         Scanner scanner = new Scanner(System.in);
-        this.createMenuHeader(error);
+        this.displayMenuHeader(error);
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("Cliente");
         colLabl.add("Carro");
@@ -148,7 +148,7 @@ public class Menu{
 
     public void top10ClientsShow (List<List<String>> valTab){
         Scanner scanner = new Scanner(System.in);
-        this.createMenuHeader("");
+        this.displayMenuHeader("");
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("User");
         colLabl.add("Distance");
@@ -163,7 +163,7 @@ public class Menu{
 
     public SpecificCar specificCarRent(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
-        this.createMenuHeader(error);
+        this.displayMenuHeader(error);
         out.println("Matricula:");
         String carType = scanner.nextLine();
         try {
@@ -175,7 +175,7 @@ public class Menu{
 
     public RentCarSimple simpleCarRent(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
-        this.createMenuHeader(error);
+        this.displayMenuHeader(error);
         out.println("Tipo do Carro: [electric, gas, hybrid or any]");
         String carType = scanner.nextLine();
         try {
@@ -187,7 +187,7 @@ public class Menu{
 
     public NewLogin newLogin(String error) {
         Scanner scanner = new Scanner(System.in);
-        this.createMenuHeader(error);
+        this.displayMenuHeader(error);
         out.println("User:");
         String user = scanner.nextLine();
         out.println("Password:");
@@ -197,7 +197,7 @@ public class Menu{
     }
 
     public RegisterCar newRegisterCar(String error) throws InvalidNewRegisterException {
-        this.createMenuHeader(error);
+        this.displayMenuHeader(error);
         Scanner scanner = new Scanner(System.in);
         out.println("Matricula:");
         String matricula = scanner.nextLine();
@@ -230,7 +230,7 @@ public class Menu{
     }
 
     public RegisterUser newRegisterUser(String error) throws InvalidNewRegisterException {
-        createMenuHeader(error);
+        displayMenuHeader(error);
         Scanner scanner = new Scanner(System.in);
         out.println("Nome de Utilizador:");
         String user = scanner.nextLine();
@@ -269,7 +269,7 @@ public class Menu{
             if (this.options.size() > i - 1 && i > 0) {
                 this.prev.push(this.menu);
                 this.menu = this.options.get(i - 1);
-                this.correctMenu();
+                this.pickChildMenus();
             }
         }
         switch (str) {
@@ -288,13 +288,13 @@ public class Menu{
     public Menu selectOption(MenuInd i) {
         this.prev.push(this.menu);
         this.menu = i;
-        this.correctMenu();
+        this.pickChildMenus();
         return this;
     }
 
     public TimeInterval getTimeInterval(String error) throws InvalidTimeIntervalException{
         Scanner scanner = new Scanner(System.in);
-        this.createMenuHeader(error);
+        this.displayMenuHeader(error);
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -313,7 +313,7 @@ public class Menu{
 
     public RateOwnerCar pendingRateShow(String error, String pending, int total) throws InvalidRatingException {
         Scanner scanner = new Scanner(System.in);
-        createMenuHeader(error);
+        displayMenuHeader(error);
         out.println(total + ".");
         out.println(pending);
         out.println();
@@ -339,7 +339,7 @@ public class Menu{
     public Menu back() {
         if (this.prev.size() > 0) {
             this.menu = this.prev.pop();
-            this.correctMenu();
+            this.pickChildMenus();
         } else {
             this.run = false;
         }
@@ -348,7 +348,7 @@ public class Menu{
         return this;
     }
 
-    private void createMenuHeader(String error) {
+    private void displayMenuHeader(String error) {
         out.print("\033\143");
         out.println(this.createHeader());
         out.println(new StringBetter(error).under().toString());
@@ -383,88 +383,66 @@ public class Menu{
     }
 
     private String menuOptionText(int i) {
-        String r = "";
         switch (this.options.get(i)) {
             case Inicial:
-                r += "Menu Inicial";
+                return "Menu Inicial";
             case Register:
-                r += "Registar novo utilizador";
-                break;
+                return  "Registar novo utilizador";
             case Registar_Cliente:
-                r += "Registar novo Cliente";
-                break;
+                return "Registar novo Cliente";
             case Registar_Proprietario:
-                r += "Registar novo Proprietário";
-                break;
+                return  "Registar novo Proprietário";
             case Login:
-                r += "Login";
-                break;
+                return  "Login";
             case Alugueres_Cliente:
             case Alugueres_Owner:
-                r += "Histórico de alugueres";
-                break;
+                return "Histórico de alugueres";
             case Closest_Car:
-                r += "Carro mais próximo das suas coordenadas";
-                break;
+                return  "Carro mais próximo das suas coordenadas";
             case Cheapest_Car:
-                r += "Carro mais barato";
-                break;
+                return"Carro mais barato";
             case Cheapest_Near_Car:
-                r += "Carro mais barato dentro de uma distância";
-                break;
+                return "Carro mais barato dentro de uma distância";
             case Specific_Car:
-                r += "Carro específico";
-                break;
+                return "Carro específico";
             case Autonomy_Car:
-                r += "Carro com uma autonomia desejada.";
-                break;
+                return  "Carro com uma autonomia desejada.";
             case Add_Car:
-                r += "Adicionar novo carro";
-                break;
+                return  "Adicionar novo carro";
             case Car_Overview:
-                r += "Várias operações sobre carros";
-                break;
+                return "Várias operações sobre carros";
             case Review_Rent:
-                r += "Aceitar/rejeitar o aluguer de um determinado cliente;";
-                break;
+                return  "Aceitar/rejeitar o aluguer de um determinado cliente;";
             case Top_10_Clients:
-                r += "UMCarroJá Challenge";
-                break;
+                return "UMCarroJá Challenge";
             case Alugueres:
-                r += "Alugar um carro";
-                break;
+                return "Alugar um carro";
             case Pending_Ratings_Cli:
-                r += "Avaliações pendentes";
-                break;
+                return "Avaliações pendentes";
 
+                default:
+                    return "";
         }
-        return r;
     }
 
-    private void correctMenu() {
+    private void pickChildMenus() {
+        this.options.clear();
         switch (this.menu) {
             case Inicial:
-                this.options.clear();
                 this.options.add(MenuInd.Login);
                 this.options.add(MenuInd.Register);
                 break;
-            case Login:
-                this.options.clear();
-                break;
             case Register:
-                this.options.clear();
                 this.options.add(MenuInd.Registar_Cliente);
                 this.options.add(MenuInd.Registar_Proprietario);
                 break;
             case Cliente:
-                this.options.clear();
                 this.options.add(MenuInd.Alugueres_Cliente);
                 this.options.add(MenuInd.Pending_Ratings_Cli);
                 this.options.add(MenuInd.Alugueres);
                 this.options.add(MenuInd.Top_10_Clients);
                 break;
             case Alugueres:
-                this.options.clear();
                 this.options.add(MenuInd.Closest_Car);
                 this.options.add(MenuInd.Cheapest_Car);
                 this.options.add(MenuInd.Cheapest_Near_Car);
@@ -472,23 +450,10 @@ public class Menu{
                 this.options.add(MenuInd.Autonomy_Car);
                 break;
             case Proprietario:
-                this.options.clear();
                 this.options.add(MenuInd.Alugueres_Owner);
                 this.options.add(MenuInd.Car_Overview);
                 this.options.add(MenuInd.Review_Rent);
                 this.options.add(MenuInd.Add_Car);
-                break;
-            case Closest_Car:
-            case Cheapest_Car:
-            case Cheapest_Near_Car:
-            case Specific_Car:
-            case Autonomy_Car:
-            case Car_Overview:
-            case Review_Rent:
-            case Alugueres_Cliente:
-            case Pending_Ratings_Cli:
-            case Alugueres_Owner:
-                this.options.clear();
                 break;
         }
     }
