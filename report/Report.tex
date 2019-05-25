@@ -4,7 +4,7 @@
 \usepackage{hyperref}
 \usepackage{a4wide}
 \hypersetup{pdftitle={UMCarroJá},
-pdfauthor={José Ferreira},
+pdfauthor={José Ferreira, Joao Teixeira},
 colorlinks=true,
 urlcolor=blue,
 linkcolor=black}
@@ -22,7 +22,7 @@ linkcolor=black}
 
 \title{UMCarroJá\\ 
 \large Grupo Nº 48}
-\author{José Ferreira (A83683)}
+\author{José Ferreira (A83683) \and Joao Teixeira (A85504)}
 \date{\today}
 
 \begin{center}
@@ -33,8 +33,7 @@ linkcolor=black}
         \href{https://www.uminho.pt/PT}
         {\color{black}{\scshape\LARGE Universidade do Minho}} \par
         \vspace{1cm}
-        \href{https://www.di.uminho.pt/}
-        {\color{black}{\scshape\Large Departamento de Informática}} \par
+        {\color{black}{\scshape\Large Programacao Orientada a Objetos}} \par
         \vspace{1.5cm}
         \maketitle
     \end{minipage}
@@ -46,44 +45,46 @@ linkcolor=black}
 
 \chapter{Introdução}
 
-O objetivo deste projeto é construir um sistema de gestão de stocks,
-de forma a ser capaz de armazenar informação de artigos, stocks e vendas,
-aplicando uma arquitetura \textit{Cliente, Servidor} com recurso a \textit{System Calls}
-e vários processos, aplicando assim os conhecimentos sobre os Sistema Operativos 
-baseados em Unix adquiridos nas aulas desta UC\@.
-Como objetivo, é necessário implementar um sistema que permita a utilização concorrente de 
-um servidor por vários clientes, assegurando a conservação de toda a informação
-introduzida no sistema, bem como a consistência desta entre os vários ficheiros
-e cache.\\
-Ao longo deste relatório vamos descrever as nossas abordagens a estes problemas.
+O objetivo deste projeto é construir um sistema de aluger de carros,
+inspirado no servico de aluguer de casas \textit{Airbnb}, onde um cliente
+pode alugar um carro, onde ele mesmo e o condutor, para fazer a deslocacao
+que pretende, ou disponibilizar as suas viaturas para alugar. Para a realizacao
+deste projeto vamos aplicar conhecimentos adquiridos nas aulas da U.C. de 
+Programacao Orientada a Objetos.
+Ao longo deste relatório vamos descrever a nossa abordagem a este problema.
 
-\chapter{Módulos}\label{chap:api}
+\chapter{Classes}\label{chap:api}
 
-\section{Manutenção de Artigos}
+\section{Modelo}
 
-O modulo da Manutenção de artigos tem como função ser um `preçário'
-tendo informação dos diferentes produtos existentes, bem como o seu
-preço. Aqui é possível a criação de novos artigos, bem como a sua
-modificação. Sendo este um módulo referente a manutenção, também
-é possível correr o agregador a pedido.
+\subsection{UMCarroJa}
 
-\section{Servidor de Vendas}
+Esta e a classe onde esta contida toda a informacao sobre utilizadores,
+carros e alugueres. E tambem a grande ponte de comunicacao com o exterior
+do modelo, permitindo assim que nao haja interacao direta do exterior com
+as classes.
 
-O Servidor de vendas trata todos os pedidos dos Clientes de vendas,
-quer sejam vendas ou entradas de stock, ou informações sobre o preço
-e stocks existentes no momento.
+\subsection{User}
 
-\section{Cliente de Vendas}
+Esta e a classe com a informacao contida por qualquer user do sistema,
+e metodos comuns tanto aos clientes como aos owners.
 
-O Cliente de Vendas é a interface que o utilizador final usa para
-realizar todas as vendas e pedidos de informação, comunicando com
-o servidor de vendas.
+\subsection{Cliente}
 
-\section{Agregador}
+Esta classe e referente ao cliente que pode criar alugueres, contendo
+esta um Ponto, correspondete a posicao em que se encontra e alugueres
+que ainda nao foram avaliados.
 
-O Agregador tem como finalidade agregar vendas, ou seja, juntar
-todas as vendas referentes ao mesmo artigo de forma a poupar
-espaço.
+\subsection{Owner}
+
+Esta classe e relativa ao utilizador que tem os seus carros para aluguer,
+e este tem informacao sobre os carros que possui e tambem os alugueres
+que ainda nao avaliou
+
+\subsection{Car}
+
+Esta classe representa uma viatura, onde tem todas as suas informacoes,
+desde autonomia, quem e o seu proprietario, marca e matricula.
 
 \chapter{Arquitetura e Solução do Projeto}
 
