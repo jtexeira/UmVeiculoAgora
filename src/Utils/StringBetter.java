@@ -24,7 +24,7 @@ public class StringBetter{
         return this;
     }
 
-    public StringBetter repeate(int n){
+    public StringBetter repeat(int n){
         StringBuilder s = new StringBuilder();
         for(int i = 0; i < n; i++)
             s.append(this.str);
@@ -33,11 +33,6 @@ public class StringBetter{
 
     public StringBetter append(String strA){
         this.str += strA;
-        return this;
-    }
-
-    public StringBetter append(StringBetter strA){
-        this.str += strA.str;
         return this;
     }
 

@@ -16,11 +16,6 @@ public class Point implements Serializable {
         this.y = y;
     }
 
-    private Point(Point x) {
-        this.x = x.getX();
-        this.y = x.getY();
-    }
-
     private Double getX() {
         return this.x;
     }

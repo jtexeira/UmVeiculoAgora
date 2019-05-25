@@ -20,7 +20,7 @@ public class Table<T> implements ITable{
     private void printSeparatorLine(int[] sizeCols) {
         StringBetter sif = new StringBetter("-");
         for (int j = 0; j <= sizeCols.length - 1; j++)
-            this.builder.append("+").append(sif.repeate(sizeCols[j]).toString());
+            this.builder.append("+").append(sif.repeat(sizeCols[j]).toString());
         this.builder.append("+\n");
     }
 
@@ -46,10 +46,10 @@ public class Table<T> implements ITable{
         /*print label row*/
         this.printSeparatorLine(sizeCols);
         builder.append("|");
-        builder.append(spac.repeate(sizeCols[0]));
+        builder.append(spac.repeat(sizeCols[0]));
         for (int j = 0; j < col; j++) {
             builder.append("| ").append(this.colLabl.get(j));
-            builder.append(spac.repeate(sizeCols[j + 1] - this.colLabl.get(j).length() - 1));
+            builder.append(spac.repeat(sizeCols[j + 1] - this.colLabl.get(j).length() - 1));
         }
         builder.append("|\n");
         this.printSeparatorLine(sizeCols);
@@ -57,10 +57,10 @@ public class Table<T> implements ITable{
         /* print contents*/
         for (int i = 0; i < lin; i++) {
             builder.append("| ").append(this.linLabl.get(i));
-            builder.append(spac.repeate(sizeCols[0] - this.linLabl.get(i).length() - 1));
+            builder.append(spac.repeat(sizeCols[0] - this.linLabl.get(i).length() - 1));
             for (int j = 0; j < col; j++) {
                 builder.append("| ").append(this.iT.get(i).get(j).toString());
-                builder.append(spac.repeate(sizeCols[j + 1] - this.iT.get(i).get(j).toString().length() - 1));
+                builder.append(spac.repeat(sizeCols[j + 1] - this.iT.get(i).get(j).toString().length() - 1));
             }
             builder.append("|\n");
             this.printSeparatorLine(sizeCols);
