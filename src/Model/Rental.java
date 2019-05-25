@@ -87,7 +87,7 @@ public class Rental implements Serializable {
         str.append(this.car.getNumberPlate()).append("\n");
         str.append(this.car.getOwnerID()).append("\n");
         str.append(this.start).append("\n").append(this.end).append("\n");
-        str.append(String.format("%.2f", this.expectedPrice));
+        str.append(String.format("%.2f", this.realPrice));
         return str.toString();
     }
 

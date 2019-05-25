@@ -122,7 +122,7 @@ public class Menu{
         colLabl.add("Owner");
         colLabl.add("Inicio da Viagem");
         colLabl.add("Fim da Viagem");
-        colLabl.add("Preço estimado");
+        colLabl.add("Preço Final");
         ArrayList<String> linLabl = new ArrayList<>();
         for(int i = 0; i < valTab.size(); i++ )
             linLabl.add(String.format("%d", i + 1));
@@ -137,7 +137,7 @@ public class Menu{
         new Scanner(System.in).nextLine();
     }
 
-    public AutonomyCar autonomyCarShow(String error) throws InvalidNewRentalException {
+    public AutonomyCar autonomyCarRent(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
         this.createMenuHeader(error);
         out.println("Tipo do Carro: [electric, gas, hybrid or any]");
@@ -151,7 +151,7 @@ public class Menu{
         }
     }
 
-    public CheapestNearCar walkingDistanceShow(String error) throws InvalidNewRentalException {
+    public CheapestNearCar walkingDistanceRent(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
         this.createMenuHeader(error);
         out.println("Tipo do Carro: [electric, gas, hybrid or any]");
@@ -201,7 +201,7 @@ public class Menu{
         scanner.nextLine();
     }
 
-    public SpecificCar specificRentCarShow(String error) throws InvalidNewRentalException {
+    public SpecificCar specificCarRent(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
         this.createMenuHeader(error);
         out.println("Matricula:");
@@ -213,7 +213,7 @@ public class Menu{
         }
     }
 
-    public RentCarSimple simpleRentCarShow(String error) throws InvalidNewRentalException {
+    public RentCarSimple simpleCarRent(String error) throws InvalidNewRentalException {
         Scanner scanner = new Scanner(System.in);
         this.createMenuHeader(error);
         out.println("Tipo do Carro: [electric, gas, hybrid or any]");
@@ -225,7 +225,7 @@ public class Menu{
         }
     }
 
-    public AbstractMap.SimpleEntry<String, String> newLogin(String error) {
+    public NewLogin newLogin(String error) {
         Scanner scanner = new Scanner(System.in);
         this.createMenuHeader(error);
         out.println("User:");
@@ -233,7 +233,7 @@ public class Menu{
         out.println("Password:");
         String password = new StringBetter().readPassword().toString();
 
-        return new AbstractMap.SimpleEntry<>(user, password);
+        return new NewLogin(user, password);
     }
 
     public RegisterCar newRegisterCar(String error) throws InvalidNewRegisterException {
