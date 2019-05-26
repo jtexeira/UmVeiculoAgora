@@ -27,8 +27,8 @@ public class Controller {
             switch (menu.getMenu()) {
                 case Login:
                     try {
-                        AbstractMap.SimpleEntry<String, String> r = menu.newLogin(error);
-                        user = model.logIn(r.getKey(), r.getValue());
+                        NewLogin r = menu.newLogin(error);
+                        user = model.logIn(r.getUser(), r.getPassword());
                         menu.selectOption((user instanceof Client)? Menu.MenuInd.Cliente : Menu.MenuInd.Proprietario);
                         error = "";
                     }
@@ -72,7 +72,7 @@ public class Controller {
                     break;
                 case Closest_Car:
                     try{
-                        RentCarSimple rent = menu.simpleRentCarShow(error);
+                        RentCarSimple rent = menu.simpleCarRent(error);
                         Rental rental = model.rental(
                                 (Client)user,
                                 rent.getPoint(),
@@ -88,7 +88,7 @@ public class Controller {
                     break;
                 case Cheapest_Car:
                     try{
-                        RentCarSimple rent = menu.simpleRentCarShow(error);
+                        RentCarSimple rent = menu.simpleCarRent(error);
                         Rental rental = model.rental(
                                 (Client)user,
                                 rent.getPoint(),
@@ -112,12 +112,17 @@ public class Controller {
                     String v = menu.reviewRentShow(
                             error,
                             lR.stream()
-                                    .map(Rental::toString)
+                                    .map(Rental::toParsableUserString)
+                                    .map(x -> Arrays.asList(x.split("\n")))
                                     .collect(Collectors.toList()));
+
+                    Rental rentalReview = lR.get(Integer.parseInt(v.substring(1)) - 1);
                     try {
                         switch (v.charAt(0)) {
                             case 'a':
-                                this.model.rent(lR.get(Integer.parseInt(v.substring(1)) - 1));
+                                this.model.rent(rentalReview);
+                                out.println(rentalReview.toFinalString());
+
                                 break;
                             case 'r':
                                 this.model.refuse(owner, lR.get(Integer.parseInt(v.substring(1)) - 1));
@@ -133,7 +138,7 @@ public class Controller {
 
                 case Cheapest_Near_Car:
                     try{
-                        CheapestNearCar walkCar = menu.walkingDistanceShow(error);
+                        CheapestNearCar walkCar = menu.walkingDistanceRent(error);
 
                         Rental rental = model.rental(
                                 (Client)user,
@@ -152,7 +157,7 @@ public class Controller {
 
                 case Autonomy_Car:
                     try{
-                        AutonomyCar autoCar = menu.autonomyCarShow(error);
+                        AutonomyCar autoCar = menu.autonomyCarRent(error);
 
                         Rental rental = model.rental(
                                 autoCar.getPoint(),
@@ -170,7 +175,7 @@ public class Controller {
 
                 case Specific_Car:
                     try {
-                        SpecificCar sc = this.menu.specificRentCarShow(error);
+                        SpecificCar sc = this.menu.specificCarRent(error);
                         Rental rental = this.model.rental(sc.getPoint(), sc.getNumberPlate(), (Client)user);
                         this.menu.showRental(rental);
                         this.menu.back();
@@ -240,12 +245,15 @@ public class Controller {
                             case 'b':
                                 this.menu.back();
                                 break;
+
+                                default:
+                                    throw new InvalidNumberOfArgumentsException();
                         }
                         error = "";
                     }
                     catch (IndexOutOfBoundsException e){ error = "Valor de carro inválido"; }
                     catch (NumberFormatException e){ error = "Posição inválida"; }
-                    catch (InvalidNumberOfArgumentsException e) {error = "Invalid number of parameters";}
+                    catch (InvalidNumberOfArgumentsException e) {error = "Invalid parameters";}
                     break;
 
                 case Pending_Ratings_Cli:
@@ -258,10 +266,9 @@ public class Controller {
                             break;
                         }
 
-                        AbstractMap.SimpleEntry<Integer, Integer> r =
-                                this.menu.pendingRateShow(error, pR.get(0).toString(), pR.size());
+                        RateOwnerCar r = this.menu.pendingRateShow(error, pR.get(0).toString(), pR.size());
                       
-                        model.rate(cli, pR.get(0), r.getKey(), r.getValue());
+                        model.rate(cli, pR.get(0), r.getOwnerRate(), r.getCarRate());
 
                         error = "";
                     }
@@ -275,7 +282,7 @@ public class Controller {
                         this.menu.rentalHistoryShow(ti,
                                 this.model.getRentalListOwner((Owner) this.user, ti.getInicio(), ti.getFim())
                                         .stream()
-                                        .map(Rental::toParsableString)
+                                        .map(Rental::toParsableOwnerString)
                                         .map(x -> Arrays.asList(x.split("\n")))
                                         .collect(Collectors.toList()));
 
@@ -292,7 +299,7 @@ public class Controller {
                         this.menu.rentalHistoryShow(ti,
                                 this.model.getRentalListClient((Client) this.user, ti.getInicio(), ti.getFim())
                                         .stream()
-                                        .map(Rental::toParsableString)
+                                        .map(Rental::toParsableOwnerString)
                                         .map(x -> Arrays.asList(x.split("\n")))
                                         .collect(Collectors.toList()));
 
