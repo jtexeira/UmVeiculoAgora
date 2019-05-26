@@ -49,7 +49,7 @@ O objetivo deste projeto é construir um sistema de aluguer de carros,
 inspirado no serviço de aluguer de casas \textit{Airbnb}, onde um cliente
 pode alugar um carro, onde ele mesmo e o condutor, para fazer a deslocação
 que pretende, ou disponibilizar as suas viaturas para alugar. Para a realização
-deste projeto vamos aplicar conhecimentos adquiridos nas aulas da U.C. de 
+deste projeto vamos aplicar conhecimentos adquiridos nas aulas da UC de 
 Programação Orientada a Objetos.
 Ao longo deste relatório vamos descrever a nossa abordagem a este problema.
 
@@ -57,7 +57,7 @@ Ao longo deste relatório vamos descrever a nossa abordagem a este problema.
 
 \section{Modelo}
 
-\subsection{UMCarroJa}
+\subsection{UMCarroJá}
 
 Esta e a classe onde esta contida toda a informação sobre utilizadores,
 carros e alugueres. É também a grande ponte de comunicação com o exterior
@@ -67,7 +67,7 @@ as classes.
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{hierarquiaUmCarroJa.png}
-    \caption{Hierarquia de Classes do \textbf{UmCarroJa}}\label{fig:hUCJ}
+    \caption{Hierarquia de Classes do \textbf{UmCarroJá}}\label{fig:hUCJ}
 \end{figure}
 
 
@@ -114,13 +114,13 @@ Esta classe contem todos os métodos para gerar e tratar um aluguer.
 
 \subsection{Rentals}
 
-Esta classe guarda a informacao relativa a todos os alugueres efetuados
+Esta classe guarda a informação relativa a todos os alugueres efetuados
 no sistema.
 
 \subsection{Parser}
 
-Esta classe tem como objetivo a leitura do ficheiro de logs e transformacao
-em infomacao utilizavel pelo programa.
+Esta classe tem como objetivo a leitura do ficheiro de logs e transformação
+em informação utilizável pelo programa.
 
 \section{View}
 
@@ -170,18 +170,17 @@ Esta Package contém todas as classes de exceções utilizadas ao longo do proje
 
 \section{Modelo}
 
-No modelo, todos os pedidos entram pela classe UmCarroJa como visivel na hieraquia de classes desta, na figura~\ref{fig:hUCJ}, a salvo excecoes, como alguns 
-gets sobre classes deste. Daqui sao chamados todos os metodos das outras
-classes necessarios a realizar os pedidos.
+No modelo, todos os pedidos entram pela classe UmCarroJá como visível na hierarquia de classes desta,
+na figura~\ref{fig:hUCJ}, a salvo exceções, como alguns gets sobre classes deste. Daqui são chamados
+todos os métodos das outras classes necessários a realizar os pedidos.
 
-\chapter{Introducao de novos tipos de Viaturas}
+\chapter{Introdução de novos tipos de Viaturas}
 
-Neste momento, e a luz do ficheiro de logs fornecido, todos os carros sao
-tratados de igual maneira, pelo que a diferenciacao entre os diversos tipos
-de veiculos e feita atraves de um \textit{enum}. Para facilitar a criacao
-de novos tipos de veiculos, a nossa classe \textit{Car} 
-devia ser tornada uma interface, ou uma classe abstrata, de forma a que inserir novos veiculos fosse apenas a criacao de uma nova classe que implementa ou extende a classe
-\textit{Car}
+Neste momento, e a luz do ficheiro de logs fornecido, todos os carros são tratados de igual maneira,
+pelo que a diferenciação entre os diversos tipos de veículos e feita através de um \textit{enum}.
+Para facilitar a criação de novos tipos de veículos, a nossa classe \textit{Car} 
+devia ser tornada uma interface, ou uma classe abstrata, de forma a que inserir novos veículos fosse
+apenas a criação de uma nova classe que implementa ou extende a classe \textit{Car}
 
 \chapter{Conclusão}
 
