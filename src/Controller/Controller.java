@@ -26,13 +26,13 @@ public class Controller {
                     try {
                         NewLogin r = menu.newLogin(error);
                         user = model.logIn(r.getUser(), r.getPassword());
-                        menu.selectOption((user instanceof Client)? Menu.MenuInd.Cliente : Menu.MenuInd.Proprietario);
+                        menu.selectOption((user instanceof Client)? Menu.MenuInd.Client : Menu.MenuInd.Owner);
                         error = "";
                     }
                     catch (InvalidUserException e){ error = "Invalid Username"; }
                     catch (WrongPasswordExecption e){ error = "Invalid Password"; }
                     break;
-                case Registar_Cliente:
+                case RegisterClient:
                     try {
                         RegisterUser registerUserCli = menu.newRegisterUser(error);
                         Client client = new Client(
@@ -50,7 +50,7 @@ public class Controller {
                     catch (InvalidNewRegisterException e){ error = "Parametros Inválidos"; }
                     catch (UserExistsException e){ error = "Utilizador já existe"; }
                     break;
-                case Registar_Proprietario:
+                case RegisterOwner:
                     try {
                         RegisterUser registerUserProp = menu.newRegisterUser(error);
                         Owner owner = new Owner(
@@ -67,7 +67,7 @@ public class Controller {
                     catch (InvalidNewRegisterException e){ error = "Parametros Inválidos"; }
                     catch (UserExistsException e){ error = "Utilizador já existe"; }
                     break;
-                case Closest_Car:
+                case Closest:
                     try{
                         RentCarSimple rent = menu.simpleCarRent(error);
                         Rental rental = model.rental(
@@ -83,7 +83,7 @@ public class Controller {
                     catch (NoCarAvaliableException e) { error = "No cars availables"; }
                     catch (InvalidNewRentalException e){error = "Novo Rental inválido"; }
                     break;
-                case Cheapest_Car:
+                case Cheapest:
                     try{
                         RentCarSimple rent = menu.simpleCarRent(error);
                         Rental rental = model.rental(
@@ -99,7 +99,7 @@ public class Controller {
                     catch (NoCarAvaliableException e) { error = "No cars availables"; }
                     catch (InvalidNewRentalException e){error = "Novo Rental inválido"; }
                     break;
-                case Review_Rent:
+                case ReviewRental:
                     Owner owner = (Owner)this.user;
                     ArrayList<Rental> lR = owner.getPending();
                     if (lR.size() == 0){
@@ -136,7 +136,7 @@ public class Controller {
                     catch(NumberFormatException | IndexOutOfBoundsException e){error = "Input Inválido";}
                     break;
 
-                case Cheapest_Near_Car:
+                case CheapestNear:
                     try{
                         CheapestNearCar walkCar = menu.walkingDistanceRent(error);
 
@@ -155,7 +155,7 @@ public class Controller {
                     catch (NoCarAvaliableException e)  {error = "No cars availables"; }
                     break;
 
-                case Autonomy_Car:
+                case Autonomy:
                     try{
                         AutonomyCar autoCar = menu.autonomyCarRent(error);
 
@@ -173,7 +173,7 @@ public class Controller {
                     catch (NoCarAvaliableException e) { error = "No cars availables"; }
                     break;
 
-                case Specific_Car:
+                case Specific:
                     try {
                         SpecificCar sc = this.menu.specificCarRent(error);
                         Rental rental = this.model.rental(sc.getPoint(), sc.getNumberPlate(), (Client)user);
@@ -186,7 +186,7 @@ public class Controller {
                     catch (InvalidNewRentalException e) { error = "Invalid Parameters"; }
                     break;
 
-                case Add_Car:
+                case AddCar:
                     try {
                         RegisterCar registerCar = menu.newRegisterCar(error);
                         Owner ownerCar = (Owner)this.user;
@@ -237,7 +237,7 @@ public class Controller {
                     this.menu.back();
                     break;
 
-                case Car_Overview:
+                case CarOverview:
                     Owner ownerCar = (Owner)this.user;
                     String action = this.menu.carOverviewShow(error,
                             ownerCar.getCars().stream()
@@ -273,7 +273,7 @@ public class Controller {
                     catch (InvalidNumberOfArgumentsException e) {error = "Invalid parameters";}
                     break;
 
-                case Pending_Ratings:
+                case Pending:
                     try {
                         Client cli = (Client) user;
                         List<Rental> pR = cli.getPendingRates();
@@ -292,7 +292,7 @@ public class Controller {
                     catch (InvalidRatingException e){error = "Parametros Invalidos";}
                     break;
 
-                case Alugueres_Owner:
+                case HistoryOwner:
                     try{
                         TimeInterval ti = this.menu.getTimeInterval(error);
 
@@ -309,7 +309,7 @@ public class Controller {
                     catch (InvalidTimeIntervalException e){error = "Intervalo Inválido";}
                     break;
 
-                case Alugueres_Cliente:
+                case HistoryClient:
                     try{
                         TimeInterval ti = this.menu.getTimeInterval(error);
 
