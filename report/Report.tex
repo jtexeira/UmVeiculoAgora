@@ -98,7 +98,7 @@ que ainda não avaliou.
 
 Esta classe contem a informação de todos os utilizadores do sistema.
 
-\subsection{Car}
+\subsection{Car}\label{chap:car}
 
 Esta classe representa uma viatura, onde tem todas as suas informações,
 desde autonomia, quem é o seu proprietário, marca e matricula.
@@ -170,7 +170,7 @@ Esta Package contém todas as classes de exceções utilizadas ao longo do proje
 
 \section{Modelo}
 
-No modelo, todos os pedidos entram pela classe UmCarroJa como visivel na hieraquia de classes desta\ref{fig:hUCJ}, a salvo excecoes, como alguns 
+No modelo, todos os pedidos entram pela classe UmCarroJa como visivel na hieraquia de classes desta, na figura~\ref{fig:hUCJ}, a salvo excecoes, como alguns 
 gets sobre classes deste. Daqui sao chamados todos os metodos das outras
 classes necessarios a realizar os pedidos.
 
@@ -178,7 +178,10 @@ classes necessarios a realizar os pedidos.
 
 Neste momento, e a luz do ficheiro de logs fornecido, todos os carros sao
 tratados de igual maneira, pelo que a diferenciacao entre os diversos tipos
-de veiculos e feita atraves de um \textit{enum}. 
+de veiculos e feita atraves de um \textit{enum}. Para facilitar a criacao
+de novos tipos de veiculos, a nossa classe \textit{Car} 
+devia ser tornada uma interface, ou uma classe abstrata, de forma a que inserir novos veiculos fosse apenas a criacao de uma nova classe que implementa ou extende a classe
+\textit{Car}
 
 \chapter{Testes}
 
