@@ -64,5 +64,17 @@ public class Owner extends User {
     public Owner clone() {
         return new Owner(this);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || this.getClass() != o.getClass()) return false;
+
+        Owner owner = (Owner) o;
+        return this.cars.equals(owner.cars)
+                && this.pending.equals(owner.pending)
+                && this.historic.equals(owner.historic);
+    }
 }
 

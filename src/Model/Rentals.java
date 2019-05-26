@@ -107,4 +107,14 @@ class Rentals implements Serializable {
                 .filter(e -> e.getOwnerID().equals(carID))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || this.getClass() != o.getClass()) return false;
+
+        Rentals rentals = (Rentals) o;
+        return this.rentalBase.equals(rentals.rentalBase);
+    }
 }

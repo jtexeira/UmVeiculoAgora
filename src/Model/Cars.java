@@ -49,15 +49,6 @@ public class Cars implements Serializable {
     }
 
     /**
-     * Verifica se um carro existe na base de dados
-     * @param numberPlate Matricula a procurar
-     * @return Se o carro existe ou não
-     */
-    public boolean carExixts(String numberPlate) {
-        return this.carBase.containsKey(numberPlate);
-    }
-
-    /**
      * Clona um objeto da classe Model.Cars
      * @return Clone do objeto
      */
@@ -133,6 +124,16 @@ public class Cars implements Serializable {
         catch(IndexOutOfBoundsException ignored) {
             throw new NoCarAvaliableException();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || this.getClass() != o.getClass()) return false;
+
+        Cars cars = (Cars) o;
+        return this.carBase.equals(cars.carBase);
     }
 
     Car getCar(Point dest, double range, Car.CarType a) throws NoCarAvaliableException {

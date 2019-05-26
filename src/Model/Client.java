@@ -46,4 +46,14 @@ public class Client extends User {
         return new ArrayList<>(this.pendingRates);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || this.getClass() != o.getClass()) return false;
+
+        Client client = (Client) o;
+        return this.pos.equals(client.pos)
+                && this.pendingRates.equals(client.pendingRates);
+    }
 }

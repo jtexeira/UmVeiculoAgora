@@ -16,7 +16,7 @@ public class Car implements Serializable {
     private final double avgSpeed;
     private double basePrice;
     private final double gasMileage;
-    private Point position;
+    private final Point position;
     private final int fullTankRange;
 
     private boolean isAvailable;
@@ -70,12 +70,10 @@ public class Car implements Serializable {
     }
 
     void setPosition(Point position, double delay) {
-        System.out.println(range);
         this.range -= this
                 .position
                 .distanceBetweenPoints(position) * (1 + (delay % 0.2));
         System.out.println(range);
-        this.position = position;
     }
 
     void setBasePrice(double basePrice) {
@@ -197,6 +195,29 @@ public class Car implements Serializable {
         if(this.range / this.getFullTankRange() < 0.15)
             a.append("O carro necessita de ser abastecido\n");
         return a.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || this.getClass() != o.getClass()) return false;
+
+        Car car = (Car) o;
+        return this.avgSpeed == car.avgSpeed
+                && this.basePrice == car.basePrice
+                && this.gasMileage == car.gasMileage
+                && this.fullTankRange == car.fullTankRange
+                && this.isAvailable == car.isAvailable
+                && this.range == car.range
+                && this.rating == car.rating
+                && this.nRatings == car.nRatings
+                && this.numberPlate.equals(car.numberPlate)
+                && this.owner.equals(car.owner)
+                && this.brand.equals(car.brand)
+                && this.type == car.type
+                && this.position.equals(car.position)
+                && this.historic.equals(car.historic);
     }
 
     @Override

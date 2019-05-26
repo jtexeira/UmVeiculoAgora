@@ -79,7 +79,7 @@ public class Controller {
                         menu.back();
                         error = "";
                     }
-                    catch (UnknownCompareTypeException e) {}
+                    catch (UnknownCompareTypeException ignored) {}
                     catch (NoCarAvaliableException e) { error = "No cars availables"; }
                     catch (InvalidNewRentalException e){error = "Novo Rental inválido"; }
                     break;
@@ -95,7 +95,7 @@ public class Controller {
                         menu.back();
                         error = "";
                     }
-                    catch (UnknownCompareTypeException e) {}
+                    catch (UnknownCompareTypeException ignored) {}
                     catch (NoCarAvaliableException e) { error = "No cars availables"; }
                     catch (InvalidNewRentalException e){error = "Novo Rental inválido"; }
                     break;

@@ -33,4 +33,14 @@ class Users implements Serializable {
             throw new InvalidUserException();
         return a;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || this.getClass() != o.getClass()) return false;
+
+        Users users = (Users) o;
+        return this.userBase.equals(users.userBase);
+    }
 }
