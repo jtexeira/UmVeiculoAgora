@@ -22,7 +22,7 @@ linkcolor=black}
 
 \title{UMCarroJá\\ 
 \large Grupo Nº 48}
-\author{João Teixeira (A85504) \and Emanuel Rodrigues(A84776) \and José Ferreira (A83683)}
+\author{João Teixeira (A85504) \and Emanuel Rodrigues (A84776) \and José Ferreira (A83683)}
 \date{\today}
 
 \begin{center}
@@ -67,7 +67,7 @@ as classes.
 \begin{figure}[h]
     \centering
     \includegraphics[scale=0.5]{hierarquiaUmCarroJa.png}
-    \caption{Hierarquia de Classes do \textbf{UmCarroJa}}
+    \caption{Hierarquia de Classes do \textbf{UmCarroJa}}\label{fig:hUCJ}
 \end{figure}
 
 
@@ -111,6 +111,17 @@ como procurar carros conforme as condições dadas para efetuar um aluguer.
 \subsection{Rental}
 
 Esta classe contem todos os métodos para gerar e tratar um aluguer.
+
+\subsection{Rentals}
+
+Esta classe guarda a informacao relativa a todos os alugueres efetuados
+no sistema.
+
+\subsection{Parser}
+
+Esta classe tem como objetivo a leitura do ficheiro de logs e transformacao
+em infomacao utilizavel pelo programa.
+
 \section{View}
 
 \subsection{Menu}
@@ -157,84 +168,17 @@ Esta Package contém todas as classes de exceções utilizadas ao longo do proje
 
 \chapter{Arquitetura e Solução do Projeto}
 
-\section{Manutenção de Artigos}
+\section{Modelo}
 
-A Manutenção de Artigos trata de manter artigos, respetivos preços
-e nomes. Para manter essa informação usa dois ficheiros, \textit{strings}
-e \textit{artigos}. O utilizador consegue adicionar e modificar artigos
-através do stdin. Embora a manutenção de vendas seja independente dos 
-restantes módulos, este comunica com o Servidor de Vendas, caso este esteja
-a correr, de forma a manter a sincronização  da informação sobre o preço 
-e numero de artigos existentes em ambos os lados. Para manter o tamanho
-do ficheiro de \textit{strings} o mais pequeno possível, foi implementado
-um compactador para esse ficheiro, garantindo assim que não existem grandes
-volumes de dados desatualizados.\\
-Aqui também é possível correr o agregador concorrente sobre o ficheiro 
-de vendas.
+No modelo, todos os pedidos entram pela classe UmCarroJa como visivel na hieraquia de classes desta\ref{fig:hUCJ}, a salvo excecoes, como alguns 
+gets sobre classes deste. Daqui sao chamados todos os metodos das outras
+classes necessarios a realizar os pedidos.
 
-\section{Servidor de Vendas}
+\chapter{Introducao de novos tipos de Viaturas}
 
-O Servidor de Vendas trata dos pedidos de todos os clientes, e trata de 
-manter informação sobre o stock de cada artigo. Para manter essa informação
-utiliza o ficheiro \textit{stocks}. O Servidor corre em background, consistindo
-em três processos distintos que tratam de tarefas diferentes:
-\begin{itemize} 
-    \item Sincronização com a Manutenção de Artigos
-        (preços e criação de novos artigos), com a finalidade de manter,
-        tanto o ficheiro de stocks, como a cache de preços sempre atualizada.
-    \item Conter a cache de preços.
-    \item Comunicação e tratamento dos pedidos dos clientes.
-\end{itemize}
-Toda a comunicação com o servidor é feita com recurso a \textit{Named pipes},
-existindo um pipe para os clientes efetuarem pedidos e um para o Manutenção
-de Artigos enviar as alterações que ocorram da parte dele.
-
-\section{Cliente de Vendas}
-
-O Cliente de Vendas interage com o utilizador a partir do \textit{stdin} e 
-\textit{stdout}, e interage com o Servidor de Vendas enviando informação
-para o pipe de entrada que o Servidor cria, e recebe a resposta deste
-através de um pipe que ele cria, tendo como identificador o seu \textit{PID},
-de forma a garantir que as informações não são lidas por outro cliente.
-Para isto acontecer, para além do pedido, é escrito no pipe de leitura do
-servidor o \textit{PID} do cliente.
-
-\section{Agregador}
-
-O agregador recebe input do \textit{stdin} linhas com o formato estipulado
-para o ficheiro \textit{vendas}, calculando os totais de cada artigo,
-devolvendo esses totais no mesmo formato pelo \textit{stdout}.
-
-\chapter{Cache de Preços}
-
-A cache de preços, parte integrante do Servidor de Vendas, existe para
-evitar consultar o ficheiro de Artigos a cada pedido do cliente.
-Para a manter sempre sincronizada com a informação que existe na parte da
-Manutenção de artigos, optamos por implementar esta num processo distinto
-do Servidor, afim de não causar atrasos nas respostas aos pedidos dos clientes.
-Assim, quando o servidor necessita da informação sobre um preço de um artigo,
-envia o pedido através do pipe criado para o efeito.
-
-\chapter{Agregador Concorrente}
-
-O Agregador Concorrente, implementado na Manutenção de Artigos, consiste
-em correr o agregador sobre o ficheiro vendas, dividindo o em partes, sendo
-capaz de agregar essas pequenas partes em paralelo e por fim agregar as 
-partes mais pequenas todas, tornando assim a agregação deste ficheiro muito
-mais rápida.
-
-\chapter{Sincronização Artigos Stock}
-
-Como a informação contida no ficheiro Stocks tem que estar sempre atualizada
-com o ficheiro Artigos, ao ser criado o ficheiro Artigos, é guardada a 
-informação de quando foi criado. Esta mesma marca temporária é transcrita para
-o ficheiro Stocks na sua criação. Para assegurar que o ficheiro Stocks
-tem a informação referente ao ficheiro Artigos mais atualizado, caso essa marca
-difira entre ficheiros, o ficheiro Stocks é totalmente refeito. Também quando são
-adicionados novos artigos, essas alterações são comunicadas ao Servidor, que trata
-de actualizar o ficheiro. Quando o servidor não esta a correr, essa verificação
-e feita ao arranque do mesmo, tendo assim a certeza que as referencias a artigos
-do ficheiro Stocks são corretas e as mais recentes.
+Neste momento, e a luz do ficheiro de logs fornecido, todos os carros sao
+tratados de igual maneira, pelo que a diferenciacao entre os diversos tipos
+de veiculos e feita atraves de um \textit{enum}. 
 
 \chapter{Testes}
 
