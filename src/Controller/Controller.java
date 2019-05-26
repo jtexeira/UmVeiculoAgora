@@ -108,20 +108,24 @@ public class Controller {
                     }
                     String v = menu.reviewRentShow(
                             error,
+                            owner.getRates(),
                             lR.stream()
                                     .map(Rental::toParsableUserString)
                                     .map(x -> Arrays.asList(x.split("\n")))
                                     .collect(Collectors.toList()));
 
-                    Rental rentalReview = lR.get(Integer.parseInt(v.substring(1)) - 1);
                     try {
                         switch (v.charAt(0)) {
                             case 'a':
-                                this.model.rent(rentalReview);
-                                this.menu.showRental(rentalReview.toFinalString());
+                                this.model.rent(lR.get(Integer.parseInt(v.substring(1)) - 1));
+                                this.model.rate(
+                                        owner,
+                                        lR.get(Integer.parseInt(v.substring(1)) - 1),
+                                        this.menu.showRentalRate(
+                                                lR.get(Integer.parseInt(v.substring(1)) - 1).toFinalString()));
                                 break;
                             case 'r':
-                                this.model.refuse(owner, rentalReview);
+                                this.model.refuse(owner, lR.get(Integer.parseInt(v.substring(1)) - 1));
                                 break;
                             case 'b':
                                 this.menu.back();

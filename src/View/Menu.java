@@ -65,6 +65,20 @@ public class Menu{
         scanner.nextLine();
     }
 
+    public int showRentalRate(String rental) {
+        Scanner scanner = new Scanner(System.in);
+        String error = "";
+        while(true) {
+            this.displayMenuHeader(error);
+            out.println(rental);
+            out.println("Client rating:");
+            try {
+                return scanner.nextInt();
+            }
+            catch (InputMismatchException e) {error = "Invalid rating";}
+        }
+    }
+
     public String carOverviewShow (String error, List<List<String>> valTab){
         this.displayMenuHeader(error);
         ArrayList<String> colLabl = new ArrayList<>();
@@ -127,17 +141,20 @@ public class Menu{
         }
     }
 
-    public String reviewRentShow(String error, List<List<String>> lR){
+    public String reviewRentShow(String error, int ownerRating, List<List<String>> lR){
         Scanner scanner = new Scanner(System.in);
         this.displayMenuHeader(error);
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("Cliente");
         colLabl.add("Carro");
-        colLabl.add("Inicio da Viagem");
-        colLabl.add("Fim da Viagem");
+        colLabl.add("Inicio");
+        colLabl.add("Fim");
         colLabl.add("Tempo a pé");
-        colLabl.add("Tempo Estimado de Viagem");
+        colLabl.add("Tempo Estimado");
         colLabl.add("Custo Estimado");
+        colLabl.add("Client Rating");
+
+        out.println("Rating pessoal: " + ownerRating);
 
         this.tableDefault(lR, colLabl);
 
