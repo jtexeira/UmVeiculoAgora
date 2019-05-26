@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Car implements Serializable {
+    private static final long serialVersionUID = -1292370800088543472L;
     private final String numberPlate;
     private final Owner owner;
 

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.List;
 
 class Users implements Serializable {
+    private static final long serialVersionUID = 7586838070562585444L;
     private final Map<String, User> userBase;
 
     Users() {

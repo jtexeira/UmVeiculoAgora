@@ -14,6 +14,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class UMCarroJa implements Serializable {
+    private static final long serialVersionUID = 8905150170424120902L;
     private final Cars cars;
     private final Users users;
     private final Rentals rentals;

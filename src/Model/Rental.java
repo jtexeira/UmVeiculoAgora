@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Rental implements Serializable {
+    private static final long serialVersionUID = 7119901023330524504L;
     private final Client client;
     private final Car car;
     private final Point start;

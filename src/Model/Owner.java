@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Owner extends User {
+    private static final long serialVersionUID = -2511785557930475729L;
     private List<Car> cars;
     private List<Rental> pending;
     private List<Rental> historic;

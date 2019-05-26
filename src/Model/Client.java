@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client extends User {
+    private static final long serialVersionUID = 6476239603804875239L;
     private Point pos;
     private final List<Rental> pendingRates;
 

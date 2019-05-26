@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 class Rentals implements Serializable {
+    private static final long serialVersionUID = 1526373866446179937L;
     private final List<Rental> rentalBase;
 
     static private int id;
