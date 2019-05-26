@@ -203,7 +203,7 @@ public class Menu{
         String matricula = scanner.nextLine();
         out.println("Marca:");
         String marca = scanner.nextLine();
-        out.println("Tipo do Carro: [electric, gas, hybrid or any]");
+        out.println("Tipo do Carro: [electric, gas or hybrid]");
         String carType = scanner.nextLine();
         try {
             out.println("Velocidade Média:");
