@@ -47,7 +47,6 @@ public class UMCarroJa implements Serializable {
         Client c = (Client) users.getUser(username);
         Car car = cars.getCar(preference, dest, c.getPos(), a);
         Rental r = new Rental(car, c, dest);
-        car.pendingRental(r);
         this.rent(r);
     }
 
