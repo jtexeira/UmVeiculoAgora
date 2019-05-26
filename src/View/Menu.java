@@ -35,13 +35,15 @@ public class Menu{
         Cheapest_Near_Car,
         Specific_Car,
         Autonomy_Car,
+        Top_10_Clients,
         Alugueres_Owner,
         Review_Rent,
         Car_Overview,
         Add_Car,
-        Top_10_Clients,
         Alugueres,
-        Pending_Ratings_Cli
+        Pending_Ratings,
+        NUses,
+        Distance
     }
 
     public Menu() {
@@ -163,19 +165,13 @@ public class Menu{
         return scanner.nextLine().toLowerCase();
     }
 
-    public void top10ClientsShow (List<List<String>> valTab){
-        Scanner scanner = new Scanner(System.in);
-        this.displayMenuHeader("");
+    public void top10ClientsShow (List<List<String>> valTab, String colum){
         ArrayList<String> colLabl = new ArrayList<>();
         colLabl.add("User");
-        colLabl.add("Distance");
-        ArrayList<String> linLabl = new ArrayList<>();
-        for(int i = 1; i < 11; i++)
-            linLabl.add(String.format("%dº", i));
-        Table<String> tab = new Table<>(valTab,linLabl,colLabl);
-        out.println(tab);
-
-        scanner.nextLine();
+        colLabl.add(colum);
+        this.displayMenuHeader("");
+        this.tableDefault(valTab, colLabl);
+        new Scanner(System.in).nextLine();
     }
 
     public SpecificCar specificCarRent(String error) throws InvalidNewRentalException {
@@ -434,9 +430,13 @@ public class Menu{
                 return  "Aceitar/rejeitar o aluguer de um determinado cliente;";
             case Top_10_Clients:
                 return "UMCarroJá Challenge";
+            case Distance:
+                return "Organizado por distância";
+            case NUses:
+                return "Organizado por número de Utilizações";
             case Alugueres:
                 return "Alugar um carro";
-            case Pending_Ratings_Cli:
+            case Pending_Ratings:
                 return "Avaliações pendentes";
 
                 default:
@@ -457,9 +457,13 @@ public class Menu{
                 break;
             case Cliente:
                 this.options.add(MenuInd.Alugueres_Cliente);
-                this.options.add(MenuInd.Pending_Ratings_Cli);
+                this.options.add(MenuInd.Pending_Ratings);
                 this.options.add(MenuInd.Alugueres);
                 this.options.add(MenuInd.Top_10_Clients);
+                break;
+            case Top_10_Clients:
+                this.options.add(MenuInd.NUses);
+                this.options.add(MenuInd.Distance);
                 break;
             case Alugueres:
                 this.options.add(MenuInd.Closest_Car);

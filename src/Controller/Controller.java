@@ -209,14 +209,31 @@ public class Controller {
                     catch (InvalidUserException ignored) {}
                     break;
 
-                case Top_10_Clients:
-                    menu.top10ClientsShow(this.model.getBestClients()
-                            .stream()
-                            .map(x ->
-                                    Arrays.asList(
-                                            x.getKey(),
-                                            String.format("%.2f", x.getValue()))
-                            ).collect(Collectors.toList()));
+                case NUses:
+                    menu.top10ClientsShow(
+                            this.model.getBestClientsTimes()
+                                    .stream()
+                                    .map(x ->
+                                            Arrays.asList(
+                                                    x.getKey(),
+                                                    x.getValue().toString()))
+                                    .limit(10)
+                                    .collect(Collectors.toList()),
+                            "Número de Utilizações");
+                    this.menu.back();
+                    break;
+
+                case Distance:
+                    menu.top10ClientsShow(
+                            this.model.getBestClientsTravel()
+                                    .stream()
+                                    .map(x ->
+                                         Arrays.asList(
+                                                 x.getKey(),
+                                                 String.format("%.2f", x.getValue())))
+                                    .limit(10)
+                                    .collect(Collectors.toList()),
+                            "Distância");
                     this.menu.back();
                     break;
 
@@ -256,7 +273,7 @@ public class Controller {
                     catch (InvalidNumberOfArgumentsException e) {error = "Invalid parameters";}
                     break;
 
-                case Pending_Ratings_Cli:
+                case Pending_Ratings:
                     try {
                         Client cli = (Client) user;
                         List<Rental> pR = cli.getPendingRates();
