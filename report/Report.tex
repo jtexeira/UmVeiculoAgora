@@ -142,7 +142,7 @@ O resultado final é uma tabela em que cada coluna tem o tamanho mínimo possív
 Esta Package contem um conjunto de classes que permitem a transferência de argumentos
 entre a View e o Controller de forma mais legível. Por exemplo, a classe RegisterCar
 contém todos os parâmetros necessários para registar um novo carro e uma instância desta
-é passada da View para o Controller a fim de o adicionar aos carros.
+é passada da View para o Controller a fim de o adicionar aos carros no model.
 
 \section{Controller}
 
@@ -182,42 +182,6 @@ de veiculos e feita atraves de um \textit{enum}. Para facilitar a criacao
 de novos tipos de veiculos, a nossa classe \textit{Car} 
 devia ser tornada uma interface, ou uma classe abstrata, de forma a que inserir novos veiculos fosse apenas a criacao de uma nova classe que implementa ou extende a classe
 \textit{Car}
-
-\chapter{Testes}
-
-\section{Manutenção de Artigos}
-
-Para testar a Manutenção de Artigos foram criados dois programas em Python.
-O primeiro gera input em que as instruções dadas são válidas mas aleatórias.
-O segundo gera um conjunto de instruções que é válido e é possível testar se estão
-a ser bem interpretadas.
-\begin{itemize} 
-    \item Adiciona N produtos (passados como argumento), em que o nome é igual ao id do
-        produto e o preço é igual a 0.
-    \item Altera o nome de todos os produtos para 10 vezes o seu id.
-    \item Altera o preço de todos os produtos para ser igual ao seu id.
-\end{itemize}
-Assim, para ver se o resultado é o esperado basta verificar se para um dado id
-este tem preço igual a id e tem um nome igual a 10 vezes o id.
-
-\section{Cliente de Vendas}
-
-Para testar o Cliente de Vendas foram criados dois programas em Python que
-seguem a mesma lógica dos criados para a Manutenção de Artigos.
-O primeiro gera input em que as instruções dadas são válidas mas aleatórias.
-O segundo gera um conjunto de instruções que é válido e é possível testar se estão
-a ser bem interpretadas.
-\begin{itemize} 
-    \item Acede a todos os ids.
-    \item Adiciona ao stock 100 artigos de cada artigo.
-    \item Remove do stock 10 artigos de cada artigo.
-\end{itemize}
-Assim, para verificar se o resultado é o esperado podemos confirmar se para um dado
-id o stock disponível é igual a 90.
-Na mesma veia, se vários Clientes de Vendas correrem em concorrência, para validar
-os resultados é possível verificar se a fórmula \textit{stock / 90 = N}, sendo o stock o stock
-disponível para um dado artigo e N o número de clientes de vendas que foram corridos
-em concorrência, é verdade.
 
 \chapter{Conclusão}
 
