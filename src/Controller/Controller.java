@@ -8,8 +8,6 @@ import View.ViewModel.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.lang.System.out;
-
 public class Controller {
     private final UMCarroJa model;
     private User user;
@@ -21,7 +19,6 @@ public class Controller {
     }
 
     public void run(){
-        Scanner scanner = new Scanner(System.in);
         String error = "";
         while(this.menu.getRun()) {
             switch (menu.getMenu()) {
@@ -309,8 +306,7 @@ public class Controller {
                     break;
 
                     default:
-                        out.println(menu);
-                        menu.parser(scanner.nextLine());
+                        this.menu.parser();
                         break;
             }
         }

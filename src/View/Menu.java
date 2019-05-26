@@ -4,7 +4,6 @@ import Exceptions.InvalidNewRegisterException;
 import Exceptions.InvalidNewRentalException;
 import Exceptions.InvalidRatingException;
 import Exceptions.InvalidTimeIntervalException;
-import Model.Rental;
 import Utils.Point;
 import Utils.StringBetter;
 import View.ViewModel.*;
@@ -264,7 +263,9 @@ public class Menu{
 
     }
 
-    public Menu parser(String str) {
+    public Menu parser() {
+        out.println(this);
+        String str = new Scanner(System.in).nextLine();
         if (str.matches("^[+-]?\\d{1,8}$")) {
             int i = Integer.parseInt(str);
             if (this.options.size() > i - 1 && i > 0) {
