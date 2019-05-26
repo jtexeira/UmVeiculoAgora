@@ -74,7 +74,6 @@ public class Car implements Serializable {
         this.range -= this
                 .position
                 .distanceBetweenPoints(position) * (1 + (delay % 0.2));
-        System.out.println(range);
     }
 
     void setBasePrice(double basePrice) {
