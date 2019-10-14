@@ -1,2 +1,2 @@
-# POO 2018-2019
+# UM Veiculo Agora
 MVC Car Rental Service (Object Oriented Programing Assignment)
